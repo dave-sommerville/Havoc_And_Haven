@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Havoc_And_Haven.DAL\Havoc_And_Haven.DAL.csproj" />
+    <ProjectReference Include="..\Havoc_And_Haven.Models\Havoc_And_Haven.Models.csproj" />
+  </ItemGroup>
+
 </Project>
