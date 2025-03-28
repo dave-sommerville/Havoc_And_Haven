@@ -2,11 +2,10 @@
 {
     public class Lair
     {
-        public int HeadquarterID { get; set; }
-        public string HeadquarterName { get; set; }
-        public string HeadquarterTitle { get; set; }
+        public int LairID { get; set; }
+        public string Title { get; set; }
         public DateTime DateRegistered { get; set; }
         public int LocationID { get; set; }
-        public int Superhero { get; set; }
+        public int VillainID { get; set; }
     }
 }
