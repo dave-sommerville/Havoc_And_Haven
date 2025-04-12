@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Havoc_And_Haven.BLL\Havoc_And_Haven.BLL.csproj" />
     <ProjectReference Include="..\Havoc_And_Haven.DAL\Havoc_And_Haven.DAL.csproj" />
     <ProjectReference Include="..\Havoc_And_Haven.Models\Havoc_And_Haven.Models.csproj" />

@@ -1,4 +1,6 @@
-﻿namespace Havoc_And_Haven.Models
+﻿
+
+namespace Havoc_And_Haven.Models
 {
     public class User
     {
