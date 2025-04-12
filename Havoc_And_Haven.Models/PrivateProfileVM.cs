@@ -34,7 +34,7 @@ namespace Havoc_And_Haven.Models
         public int? LairCapacity { get; set; }
         public string LairLocation { get; set; }
 
-        // Optional: add lists if you want to show other users in the same base
+        // Lists to show other users in the same base
         public List<string> OtherHeroesInHeadquarter { get; set; }
         public List<string> OtherVillainsInLair { get; set; }
     }
