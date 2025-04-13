@@ -7,7 +7,6 @@
         public string Winner { get; set; } // "Heroes" or "Villains"
         public int CrisisId { get; set; }
         public CrisisEvent CrisisEvent { get; set; }
-        public virtual ICollection<User> Heroes { get; set; }
-        public virtual ICollection<User> Villains { get; set; }
+
     }
 }

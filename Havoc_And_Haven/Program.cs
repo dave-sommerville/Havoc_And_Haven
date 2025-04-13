@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Havoc_And_Haven.DAL;
+
 namespace Havoc_And_Haven
 {
     public class Program
@@ -8,7 +11,8 @@ namespace Havoc_And_Haven
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDbContext<HavocAndHavenDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

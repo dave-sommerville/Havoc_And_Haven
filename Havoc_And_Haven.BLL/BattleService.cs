@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Havoc_And_Haven.Models;
 
-namespace Havoc_And_Haven.BLL
+namespace Havoc_And_Haven.BL
 {
     public class BattleService
-    {
+    {/*
         public async Task CheckAndTriggerBattle(CrisisEvent crisis)
         {
             if (crisis.IsResolved) return;
@@ -26,7 +22,7 @@ namespace Havoc_And_Haven.BLL
         {
             var battle = new Battle
             {
-                CrisisEventId = crisis.CrisisId,
+                CrisisId = crisis.CrisisId,
                 Heroes = crisis.Heroes.ToList(),
                 Villains = crisis.Villains.ToList(),
                 Winner = DecideWinner() // implement logic
@@ -36,13 +32,14 @@ namespace Havoc_And_Haven.BLL
             crisis.ResultingBattle = battle;
             // Save battle and crisis update to DB
         }
-
+       
         private string DecideWinner()
         {
             // Simple logic for now
             // This is where I would implement the user power levels
             return new Random().Next(0, 2) == 0 ? "Heroes" : "Villains";
         }
+        */
     }
 
 }

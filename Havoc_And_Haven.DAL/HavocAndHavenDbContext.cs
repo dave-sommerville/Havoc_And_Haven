@@ -5,7 +5,7 @@ using Havoc_And_Haven.Models;
 
 namespace Havoc_And_Haven.DAL
 {
-    public class HavocAndHavenDbContext : IdentityDbContext
+    public class HavocAndHavenDbContext : DbContext
     {
         public DbSet<Headquarters> Headquarters { get; set; }
         public DbSet<Lair> Lairs { get; set; }
@@ -25,33 +25,50 @@ namespace Havoc_And_Haven.DAL
             modelBuilder.Entity<CrisisEvent>().HasKey(e => e.CrisisId);
             modelBuilder.Entity<Battle>().HasKey(b => b.BattleId);
 
-            // Relationships
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Headquarters)
-                .WithMany(h => h.Heroes)
-                .HasForeignKey(u => u.HeadquartersId)
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Lair)
-                .WithMany(l => l.Villains)
-                .HasForeignKey(u => u.LairId)
-                .OnDelete(DeleteBehavior.Restrict);
+                // CrisisEvent relationships
             modelBuilder.Entity<CrisisEvent>()
-                .HasOne(e => e.Location)
-                .WithMany(c => c.CrisisEvents)
-                .HasForeignKey(e => e.LocationId);
+                .HasOne(ce => ce.Location)
+                .WithMany(l => l.CrisisEvents)
+                .HasForeignKey(ce => ce.LocationId);
             modelBuilder.Entity<CrisisEvent>()
-                .HasMany(e => e.Heroes)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasMany(ce => ce.Heroes)
+                .WithMany();
             modelBuilder.Entity<CrisisEvent>()
-                .HasMany(e => e.Villains)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasMany(ce => ce.Villains)
+                .WithMany();
+
+            // Battle relationships
             modelBuilder.Entity<Battle>()
                 .HasOne(b => b.CrisisEvent)
                 .WithMany()
                 .HasForeignKey(b => b.CrisisId);
+
+            // User relationships
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Headquarters)
+                .WithMany(h => h.Heroes)
+                .HasForeignKey(u => u.HeadquartersId);
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Lair)
+                .WithMany()
+                .HasForeignKey(u => u.LairId);
+
+            // Location relationships
+            modelBuilder.Entity<Location>()
+                .HasMany(l => l.CrisisEvents)
+                .WithOne(ce => ce.Location)
+                .HasForeignKey(ce => ce.LocationId);
+
+            // Headquarters relationships
+            modelBuilder.Entity<Headquarters>()
+                .HasOne(h => h.Location)
+                .WithMany()
+                .HasForeignKey(h => h.LocationId);
+            // Lair relationships
+            modelBuilder.Entity<Lair>()
+                .HasOne(h => h.Location)
+                .WithMany()
+                .HasForeignKey(h => h.LocationId);
 
             // Property Configurations
             modelBuilder.Entity<User>().Property(u => u.FirstName)
@@ -90,7 +107,7 @@ namespace Havoc_And_Haven.DAL
                 .IsRequired().HasMaxLength(100);
             modelBuilder.Entity<CrisisEvent>().Property(ce => ce.CreatedAt);
             modelBuilder.Entity<CrisisEvent>().Property(ce => ce.IsResolved);
-            modelBuilder.Entity<CrisisEvent>().Property(ce => ce.ResultingBattle);
+            //modelBuilder.Entity<CrisisEvent>().Property(ce => ce.ResultingBattle);
             modelBuilder.Entity<Battle>().Property(b => b.IncidentBegan);
             modelBuilder.Entity<Battle>().Property(b => b.Winner)
                 .HasMaxLength(100);

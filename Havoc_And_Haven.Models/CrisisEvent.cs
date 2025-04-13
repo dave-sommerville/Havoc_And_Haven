@@ -11,6 +11,6 @@
         public bool IsResolved { get; set; } = false;
         public int LocationId { get; set; }
         public Location Location { get; set; }
-        public Battle ResultingBattle { get; set; }
+        //public Battle ResultingBattle { get; set; }
     }
 }
