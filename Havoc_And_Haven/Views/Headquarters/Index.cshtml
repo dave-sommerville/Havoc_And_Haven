@@ -1,5 +1,23 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!--Visible to only the villains and admin (Add routes for create and edit actions for admin)-->
+@model IEnumerable<Headquarters>
+<h1>Hero Headquarters</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Headquarters hq in Model)
+		{
+			<tr>
+				<td>@hq.BaseTitle</td>
+				<td>@hq.Capacity</td>
+				<td>@hq.Description</td>
+				<td>@hq.Location.Address</td>
+				<td>@hq.Location.Type</td>
+				<!-- Here villains should be able to select a lair to join (This will need logic)-->
+			</tr>
+		}
+	</tbody>
+</table> 
