@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<Location>
+<h1>All Locations</h1>
+<!-- Must add authorization for create/edit/delete options-->
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var location in Model)
+		{
+			<tr>
+				<td>@location.Type</td>
+				<td>@location.Neighborhood</td>
+				<td>@location.Address</td>
+				<td>@location.Description</td>
+				<td> <!--Only for villains and admin to see need to change routing on both-->
+					<a asp-action="Create" asp-route-id="@location.LocationId">Create a Crisis Event</a> |
+				</td>
+				<td>
+					<!--Only for hero and admin to see-->
+					<a asp-action="Respond" asp-route-id="@location.LocationId">Create a Crisis Event</a> |
+				</td>
+			</tr>
+
+		}
+	</tbody>
+</table>
