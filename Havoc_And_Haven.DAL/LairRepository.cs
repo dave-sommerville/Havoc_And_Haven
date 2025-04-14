@@ -8,5 +8,7 @@ namespace Havoc_And_Haven.DAL
 {
     public class LairRepository
     {
+        private readonly HavocAndHavenDbContext _context;
+
     }
 }
