@@ -16,6 +16,8 @@ namespace Havoc_And_Haven
             builder.Services.AddDbContext<HavocAndHavenDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+            // Register DAL AND BLL Services
             builder.Services.AddTransient<CrisisEventRepository>();
             builder.Services.AddTransient<CrisisEventService>();
 

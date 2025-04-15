@@ -7,7 +7,7 @@ namespace Havoc_And_Haven.DAL
 {
     public class HavocAndHavenDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<Users> Users { get; set; }
         public DbSet<Headquarters> Headquarters { get; set; }
         public DbSet<Lair> Lairs { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -19,7 +19,7 @@ namespace Havoc_And_Haven.DAL
             base.OnModelCreating(modelBuilder);
 
             // Primary Keys
-            modelBuilder.Entity<User>().HasKey(u => u.UserId);
+            modelBuilder.Entity<Users>().HasKey(u => u.UserId);
             modelBuilder.Entity<Headquarters>().HasKey(h => h.HeadquartersId);
             modelBuilder.Entity<Lair>().HasKey(l => l.LairId);
             modelBuilder.Entity<Location>().HasKey(c => c.LocationId);
@@ -45,11 +45,11 @@ namespace Havoc_And_Haven.DAL
                 .HasForeignKey(b => b.CrisisId);
 
             // User relationships
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Users>()
                 .HasOne(u => u.Headquarters)
                 .WithMany(h => h.Heroes)
                 .HasForeignKey(u => u.HeadquartersId);
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Users>()
                 .HasOne(u => u.Lair)
                 .WithMany()
                 .HasForeignKey(u => u.LairId);
@@ -72,17 +72,17 @@ namespace Havoc_And_Haven.DAL
                 .HasForeignKey(h => h.LocationId);
 
             // Property Configurations
-            modelBuilder.Entity<User>().Property(u => u.FirstName)
+            modelBuilder.Entity<Users>().Property(u => u.FirstName)
                 .IsRequired().HasMaxLength(50);
-            modelBuilder.Entity<User>().Property(u => u.LastName)
+            modelBuilder.Entity<Users>().Property(u => u.LastName)
                 .IsRequired().HasMaxLength(50);
-            modelBuilder.Entity<User>().Property(u => u.Email)
+            modelBuilder.Entity<Users>().Property(u => u.Email)
                 .IsRequired().HasMaxLength(100);
-            modelBuilder.Entity<User>().Property(u => u.Alias)
+            modelBuilder.Entity<Users>().Property(u => u.Alias)
                 .IsRequired().HasMaxLength(50);
-            modelBuilder.Entity<User>().Property(u => u.Role)
+            modelBuilder.Entity<Users>().Property(u => u.Role)
                 .IsRequired();
-            modelBuilder.Entity<User>().Property(u => u.OriginStory)
+            modelBuilder.Entity<Users>().Property(u => u.OriginStory)
             .HasMaxLength(1000);
             modelBuilder.Entity<Headquarters>().Property(h => h.BaseTitle)
                 .IsRequired().HasMaxLength(100);

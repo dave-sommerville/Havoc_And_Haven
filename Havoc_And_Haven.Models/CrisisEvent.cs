@@ -6,8 +6,8 @@
         public string Title { get; set; }
         public DateTime CreatedAt { get; set; }
         // The mechanics of the crisis events and battles will need to be refined 
-        public  ICollection<User>? Villains { get; set; }
-        public  ICollection<User>? Heroes { get; set; }
+        public  ICollection<Users>? Villains { get; set; }
+        public  ICollection<Users>? Heroes { get; set; }
         public bool IsResolved { get; set; } = false; // I think this is redundant 
         public int LocationId { get; set; }
         public Location Location { get; set; }

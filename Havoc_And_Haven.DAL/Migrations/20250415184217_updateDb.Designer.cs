@@ -4,6 +4,7 @@ using Havoc_And_Haven.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Havoc_And_Haven.DAL.Migrations
 {
     [DbContext(typeof(HavocAndHavenDbContext))]
-    partial class HavocAndHavenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250415184217_updateDb")]
+    partial class updateDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CrisisEventUsers", b =>
+            modelBuilder.Entity("CrisisEventUser", b =>
                 {
                     b.Property<int>("CrisisEventCrisisId")
                         .HasColumnType("int");
@@ -34,10 +37,10 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("HeroesUserId");
 
-                    b.ToTable("CrisisEventUsers");
+                    b.ToTable("CrisisEventUser");
                 });
 
-            modelBuilder.Entity("CrisisEventUsers1", b =>
+            modelBuilder.Entity("CrisisEventUser1", b =>
                 {
                     b.Property<int>("CrisisEvent1CrisisId")
                         .HasColumnType("int");
@@ -49,7 +52,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("VillainsUserId");
 
-                    b.ToTable("CrisisEventUsers1");
+                    b.ToTable("CrisisEventUser1");
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.Battle", b =>
@@ -200,7 +203,7 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("Havoc_And_Haven.Models.Users", b =>
+            modelBuilder.Entity("Havoc_And_Haven.Models.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -260,7 +263,7 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CrisisEventUsers", b =>
+            modelBuilder.Entity("CrisisEventUser", b =>
                 {
                     b.HasOne("Havoc_And_Haven.Models.CrisisEvent", null)
                         .WithMany()
@@ -268,14 +271,14 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Havoc_And_Haven.Models.Users", null)
+                    b.HasOne("Havoc_And_Haven.Models.User", null)
                         .WithMany()
                         .HasForeignKey("HeroesUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CrisisEventUsers1", b =>
+            modelBuilder.Entity("CrisisEventUser1", b =>
                 {
                     b.HasOne("Havoc_And_Haven.Models.CrisisEvent", null)
                         .WithMany()
@@ -283,7 +286,7 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Havoc_And_Haven.Models.Users", null)
+                    b.HasOne("Havoc_And_Haven.Models.User", null)
                         .WithMany()
                         .HasForeignKey("VillainsUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -334,7 +337,7 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("Havoc_And_Haven.Models.Users", b =>
+            modelBuilder.Entity("Havoc_And_Haven.Models.User", b =>
                 {
                     b.HasOne("Havoc_And_Haven.Models.Headquarters", "Headquarters")
                         .WithMany("Heroes")

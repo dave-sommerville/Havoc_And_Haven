@@ -7,7 +7,7 @@
         public int Capacity { get; set; }
         public string Description { get; set; }
         public int LocationId { get; set; }
-        public Location Location { get; set; }
-        public List<User> Heroes { get; set; } = new List<User>();
+        public Location? Location { get; set; }
+        public List<Users> Heroes { get; set; } = new List<Users>();
     }
 }
