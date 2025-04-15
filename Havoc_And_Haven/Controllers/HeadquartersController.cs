@@ -10,97 +10,97 @@ namespace Havoc_And_Haven.Controllers
 {
     public class HeadquartersController : Controller
     {
-        private readonly HeadquartersService _headquartersService;
-        private readonly LocationService _locationService;
+        //private readonly HeadquartersService _headquartersService;
+        //private readonly LocationService _locationService;
 
-        public HeadquartersController(HeadquartersService headquartersService, LocationService locationService)
-        {
-            _headquartersService = headquartersService;
-            _locationService = locationService;
-        }
+        //public HeadquartersController(HeadquartersService headquartersService, LocationService locationService)
+        //{
+        //    _headquartersService = headquartersService;
+        //    _locationService = locationService;
+        //}
 
-        public IActionResult Index()
-        {
-            List<Headquarters> headquarters = _headquartersService.GetAllHeadquarters();
-            return View(headquarters);
-        }
+        //public IActionResult Index()
+        //{
+        //    List<Headquarters> headquarters = _headquartersService.GetAllHeadquarters();
+        //    return View(headquarters);
+        //}
 
-        [HttpGet]
-        public IActionResult AddHeadquarter()
-        {
-            ViewBag.Locations = _locationService.GetAllLocation();
+        //[HttpGet]
+        //public IActionResult AddHeadquarter()
+        //{
+        //    ViewBag.Locations = _locationService.GetAllLocation();
 
-            return View(new Headquarters());
-        }
+        //    return View(new Headquarters());
+        //}
 
-        [HttpPost]
-        public IActionResult AddHeadquarter(Headquarters headquarter)
-        {
-            if (ModelState.IsValid)
-            {
-                headquarter.Location = _locationService.GetLocationById(headquarter.LocationId);
+        //[HttpPost]
+        //public IActionResult AddHeadquarter(Headquarters headquarter)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        headquarter.Location = _locationService.GetLocationById(headquarter.LocationId);
 
-                _headquartersService.AddHeadquarter(headquarter);
+        //        _headquartersService.AddHeadquarter(headquarter);
 
-                return RedirectToAction("Index");
-            }
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.Locations = _locationService.GetAllLocation();
-            return View(headquarter);
-        }
+        //    ViewBag.Locations = _locationService.GetAllLocation();
+        //    return View(headquarter);
+        //}
 
-        [HttpGet]
-        public IActionResult UpdateHeadquarters(int id)
-        {
-            Headquarters? headquarter = _headquartersService.GetAllHeadquarters().FirstOrDefault(r => r.HeadquartersId == id);
-            if (headquarter == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet]
+        //public IActionResult UpdateHeadquarters(int id)
+        //{
+        //    Headquarters? headquarter = _headquartersService.GetAllHeadquarters().FirstOrDefault(r => r.HeadquartersId == id);
+        //    if (headquarter == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            ViewBag.Locations = _locationService.GetAllLocation();
+        //    ViewBag.Locations = _locationService.GetAllLocation();
 
-            return View(headquarter);
-        }
+        //    return View(headquarter);
+        //}
 
-        [HttpPost]
-        public IActionResult UpdateHeadquarters(Headquarters headquarter)
-        {
-            if (ModelState.IsValid)
-            {
-                _headquartersService.UpdateHeadquarters(headquarter);
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //public IActionResult UpdateHeadquarters(Headquarters headquarter)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _headquartersService.UpdateHeadquarters(headquarter);
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.Locations = _locationService.GetAllLocation();
+        //    ViewBag.Locations = _locationService.GetAllLocation();
 
-            return View(headquarter);
-        }
+        //    return View(headquarter);
+        //}
 
-        [HttpGet]
-        public IActionResult DeleteHeadquarter(int id)
-        {
-            Headquarters? headquarter = _headquartersService.GetHeadquarterById(id);
-            if (headquarter == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet]
+        //public IActionResult DeleteHeadquarter(int id)
+        //{
+        //    Headquarters? headquarter = _headquartersService.GetHeadquarterById(id);
+        //    if (headquarter == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(headquarter);
-        }
+        //    return View(headquarter);
+        //}
 
-        [HttpPost]
-        public IActionResult DeleteHeadquarterConfirmed(int id)
-        {
-            Headquarters? headquarter = _headquartersService.GetHeadquarterById(id);
-            if (headquarter == null)
-            {
-                return NotFound();
-            }
+        //[HttpPost]
+        //public IActionResult DeleteHeadquarterConfirmed(int id)
+        //{
+        //    Headquarters? headquarter = _headquartersService.GetHeadquarterById(id);
+        //    if (headquarter == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _headquartersService.DeleteHeadquarter(id);
+        //    _headquartersService.DeleteHeadquarter(id);
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
     }
 }
