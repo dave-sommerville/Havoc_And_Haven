@@ -16,15 +16,10 @@ namespace Havoc_And_Haven
             builder.Services.AddDbContext<HavocAndHavenDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Register BLL Services
-            builder.Services.AddTransient<CrisisEventService>();
-            builder.Services.AddTransient<LairService>();
-            builder.Services.AddTransient<HeadquartersRepository>();
 
-            // Register DAL Services
+            // Register DAL AND BLL Services
             builder.Services.AddTransient<CrisisEventRepository>();
-            builder.Services.AddTransient<LairRepository>();
-            builder.Services.AddTransient<HeadquartersService>();
+            builder.Services.AddTransient<CrisisEventService>();
 
             builder.Services.AddTransient<BattleRepository>();
             builder.Services.AddTransient<BattleService>();
