@@ -1,0 +1,23 @@
+﻿<!--Visible to only the villains and admin (Add routes for create and edit actions for admin)-->
+@model IEnumerable<Lair>
+<h1>Villain Lairs</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Lair lair in Model)
+		{
+			<tr>
+				<td>@lair.BaseTitle</td>
+				<td>@lair.Capacity</td>
+				<td>@lair.Description</td>
+				<td>@lair.Location.Address</td>
+				<td>@lair.Location.Type</td>
+			<!-- Here villains should be able to select a lair to join (This will need logic)-->
+			</tr>
+		}
+	</tbody>
+</table>

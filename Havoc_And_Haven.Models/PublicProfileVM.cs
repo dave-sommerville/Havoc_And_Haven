@@ -11,7 +11,6 @@ namespace Havoc_And_Haven.Models
     {
         public string Alias { get; set; }
         public string OriginStory { get; set; }
-        public string Role { get; set; } // Could also be an Enum
         public int PowerLevel { get; set; }
 
         // Headquarters Info (if Hero)

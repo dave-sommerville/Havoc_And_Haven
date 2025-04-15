@@ -1,0 +1,44 @@
+﻿@model PrivateProfileVM
+
+<h1>User Profile</h1>
+<h2>@Model.FirstName @Model.LastName</h2>
+<h3>@Model.Alias</h3>
+<div>
+	<h4>Personal Information</h4>
+	<p>Role: @Model.Role</p>
+	<p>Power Level: @Model.PowerLevel</p>
+	<p>Email: @Model.Email</p>
+	<p>Origin Story:<br>@Model.OriginStory</p>
+</div>
+<div>
+
+	@if(Model.HeadquartersId != null) {
+		<h4>Headquarters</h4>
+		<p>Base Title: @Model.HeadquarterTitle</p>
+		<p>Capacity: @Model.HeadquarterCapacity</p>
+		<p>Description:<br>@Model.HeadquarterDescription</p>
+		<p>Location: @Model.HeadquarterLocation</p>
+		<ul>
+			@foreach(string hero in Model.OtherHeroesInHeadquarter)
+			{
+				<li>@hero</li>
+			}
+		</ul>
+	} else if (Model.LairId != null)
+	{
+		<h4>Lair</h4>
+		<p>Base Title: @Model.LairTitle</p>
+		<p>Capacity: @Model.LairCapacity</p>
+		<p>Description:<br>@Model.LairDescription</p>
+		<p>Location: @Model.LairLocation</p>
+		<ul>
+			@foreach (string villain in Model.OtherVillainsInLair)
+			{
+				<li>@villain</li>
+			}
+		</ul>
+	} else 
+	{
+	<p>User has no base</p>
+	}
+</div>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Battle>
+<h1>Battle Index</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Battle ID</th>
+			<th>Heroes Involved</th>
+			<th>Villains Involved</th>
+			<th>Location Address</th>
+			<th>Time of Battle</th>
+			<th>Event Description</th>
+			<th>Outcome</th> <!--If Null return default message-->
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var battle in Model)
+		{
+			<tr>
+				<td>@battle.BattleId</td>
+				<td>
+					<ul>
+						@foreach (User hero in battle.CrisisEvent.Heroes)
+						{
+							<li>@hero.Alias</li>
+						}
+					</ul>
+				</td>
+				<td>
+					<ul>
+						@foreach (User villain in battle.CrisisEvent.Villains)
+						{
+							<li>@villain.Alias</li>
+						}
+					</ul>
+				</td>
+				<td>@battle.CrisisEvent.Location.Type</td>
+				<td>@battle.IncidentBegan</td>
+				<td>@battle.CrisisEvent.Title</td>
+				<td>
+					@battle.Winner ?? "Battle Not Completed."
+				</td>
+			</tr>
+		}
+	</tbody>
