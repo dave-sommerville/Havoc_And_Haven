@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<PublicProfileVM>
+<!--  Will have to display by role (V for V, H for H)-->
+<h1>Users</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Alias</th>
+			<th>Power Level</th>
+			<th>Headquarters</th>
+			<th>Lair</th>
+			<th>View Details</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (PublicProfileVM profile in Model)
+		{
+			<tr>
+				<td>@profile.Alias</td>
+				<td>@profile.PowerLevel</td>
+				<td>@profile.HeadquarterTitle</td>
+				<td>@profile.LairTitle</td>
+				<td>
+					<a asp-action="PublicProfile" asp-route-id="@profile.UserId">View</a>
+			</tr>
+		}
+	</tbody>
+</table>
