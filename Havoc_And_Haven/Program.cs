@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Havoc_And_Haven.DAL;
 using Havoc_And_Haven.BLL;
+using Havoc_And_Haven.BL;
 
 namespace Havoc_And_Haven
 {
@@ -24,6 +25,15 @@ namespace Havoc_And_Haven
             builder.Services.AddTransient<CrisisEventRepository>();
             builder.Services.AddTransient<LairRepository>();
             builder.Services.AddTransient<HeadquartersService>();
+
+            builder.Services.AddTransient<BattleRepository>();
+            builder.Services.AddTransient<BattleService>();
+
+            builder.Services.AddTransient<HeadquartersRepository>();
+            builder.Services.AddTransient<HeadquartersService>();
+
+            builder.Services.AddTransient<LairRepository>();
+            builder.Services.AddTransient<LairService>();
 
             var app = builder.Build();
 

@@ -8,7 +8,7 @@
         // The mechanics of the crisis events and battles will need to be refined 
         public  ICollection<User>? Villains { get; set; }
         public  ICollection<User>? Heroes { get; set; }
-        public bool IsResolved { get; set; } = false;
+        public bool IsResolved { get; set; } = false; // I think this is redundant 
         public int LocationId { get; set; }
         public Location Location { get; set; }
         //public Battle ResultingBattle { get; set; }
