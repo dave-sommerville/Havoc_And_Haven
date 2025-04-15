@@ -1,45 +1,28 @@
 ﻿
+using Havoc_And_Haven.DAL;
 using Havoc_And_Haven.Models;
 
 namespace Havoc_And_Haven.BL
 {
     public class BattleService
-    {/*
-        public async Task CheckAndTriggerBattle(CrisisEvent crisis)
-        {
-            if (crisis.IsResolved) return;
+    {
+        private readonly BattleRepository _repo;
 
-            bool enoughParticipants = crisis.Heroes.Count >= 3 && crisis.Villains.Count >= 3;
-            bool oneHourPassed = (DateTime.Now - crisis.CreatedAt).TotalMinutes >= 60;
-
-            if (enoughParticipants || oneHourPassed)
-            {
-                await TriggerBattle(crisis);
-            }
+        public BattleService(BattleRepository repo) {
+            _repo = repo;
         }
 
-        public async Task TriggerBattle(CrisisEvent crisis)
-        {
-            var battle = new Battle
-            {
-                CrisisId = crisis.CrisisId,
-                Heroes = crisis.Heroes.ToList(),
-                Villains = crisis.Villains.ToList(),
-                Winner = DecideWinner() // implement logic
-            };
+        public List<Battle> GetAllBattles() {
+            return _repo.GetAll();
+        }
 
-            crisis.IsResolved = true;
-            crisis.ResultingBattle = battle;
-            // Save battle and crisis update to DB
+        public void CreateBattle(Battle battle) {
+            _repo.Add(battle);
         }
-       
-        private string DecideWinner()
-        {
-            // Simple logic for now
-            // This is where I would implement the user power levels
-            return new Random().Next(0, 2) == 0 ? "Heroes" : "Villains";
+
+        public List<CrisisEvent> GetAllCrises() {
+            return _repo.GetAllCrises();
         }
-        */
     }
 
 }
