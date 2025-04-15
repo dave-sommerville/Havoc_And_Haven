@@ -7,6 +7,7 @@ namespace Havoc_And_Haven.DAL
 {
     public class HavocAndHavenDbContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
         public DbSet<Headquarters> Headquarters { get; set; }
         public DbSet<Lair> Lairs { get; set; }
         public DbSet<Location> Locations { get; set; }
