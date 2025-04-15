@@ -72,10 +72,6 @@ namespace Havoc_And_Haven.Controllers {
             return View(crisisEvent);
         }
 
-        public IActionResult Delete() {
-            return View(_crisisService.GetAllCrises());
-        }
-
         [HttpPost]
         public IActionResult Delete(int id) {
             CrisisEvent crisis = _crisisService.GetCrisisById(id);
