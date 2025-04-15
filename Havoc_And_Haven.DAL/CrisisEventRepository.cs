@@ -44,11 +44,11 @@ namespace Havoc_And_Haven.DAL {
         }
 
         public List<User> GetHeroes() {
-            return _context.User.Where(u => u.Role == "Hero").ToList();
+            return _context.Users.Where(u => u.Role == "Hero").ToList();
         }
 
         public List<User> GetVillains() {
-            return _context.User.Where(u => u.Role == "Villain").ToList();
+            return _context.Users.Where(u => u.Role == "Villain").ToList();
         }
 
         public List<Location> GetAllLocations() {
@@ -56,7 +56,7 @@ namespace Havoc_And_Haven.DAL {
         }
 
         public List<User> GetUsersByIds(List<int> ids) {
-            return _context.User.Where(u => ids.Contains(u.UserId)).ToList();
+            return _context.Users.Where(u => ids.Contains(u.UserId)).ToList();
         }
     }
 }
