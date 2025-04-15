@@ -18,19 +18,18 @@
 		<input asp-for="Description" class="form-control" />
 		<span asp-validation-for="Description" class="text-danger"></span>
 	</div>
-	<div class="form-group">
-		<label asp-for="Description" class="control-label"></label>
-		<input asp-for="Description" class="form-control" />
-		<span asp-validation-for="Description" class="text-danger"></span>
-	</div> <!-- Additional logic will be needed to populate and add the Villain/Location objects -->
-	<!--
-	<div class="form-group">
-		<label asp-for="LocationId">Location</label>
-		<select asp-for="LocationId" asp-items="Model.Locations" class="form-control">
-			<option value="">Select a location</option>
+	<div class="mb-3">
+		<label asp-for="LocationId" class="form-label">Select Location</label>
+		<select asp-for="LocationId" class="form-control">
+			<option value="">-- Select Location --</option>
+			@foreach (Location location in ViewBag.Locations)
+			{
+				<option value="@location.LocationId">@location.Type</option>
+			}
 		</select>
-		<span asp-validation-for="LocationId" class="text-danger"></span>
-	</div>-->
+		<span asp-validation-for="LocationId" class="text-danger fw-bold"></span>
+	</div>
+
 	<button type="submit" class="btn btn-primary">Create</button>
 	<a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
