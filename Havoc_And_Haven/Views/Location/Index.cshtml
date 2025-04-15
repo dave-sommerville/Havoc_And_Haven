@@ -15,11 +15,14 @@
 				<td>@location.Neighborhood</td>
 				<td>@location.Address</td>
 				<td>@location.Description</td>
-				<td> <!--Only for villains and admin to see need to change routing on both-->
-					<a asp-action="Create" asp-route-id="@location.LocationId">Create a Crisis Event</a> |
+				<!-- The notes-->
+				<td> <!--Only for villains and admin-->
+					<!-- Not working currently, needs to route to battle/create action/view-->
+					<a asp-action="Create" asp-route-id="@location.LocationId">Start a Battle</a> |
 				</td>
 				<td>
 					<!--Only for hero and admin to see-->
+					<!-- Respond is a potential action for the heroes to add themselves to the battle-->
 					<a asp-action="Respond" asp-route-id="@location.LocationId">Create a Crisis Event</a> |
 				</td>
 			</tr>
