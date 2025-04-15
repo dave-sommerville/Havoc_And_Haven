@@ -2,7 +2,7 @@
 
 namespace Havoc_And_Haven.Models
 {
-    public class User
+    public class Users
     {
         public int UserId { get; set; }
         public string FirstName { get; set; }

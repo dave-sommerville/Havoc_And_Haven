@@ -8,6 +8,6 @@
         public string Description { get; set; }
         public int LocationId { get; set; }
         public Location? Location { get; set; }
-        public List<User> Heroes { get; set; } = new List<User>();
+        public List<Users> Heroes { get; set; } = new List<Users>();
     }
 }

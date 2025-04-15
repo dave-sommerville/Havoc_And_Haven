@@ -12,7 +12,7 @@
 		<span asp-validation-for="Title" class="text-danger"></span>
 	</div>
 	<div class="scroll-box">
-		@foreach (User hero in ViewBag.Heroes)
+		@foreach (Users hero in ViewBag.Heroes)
 		{
 			<input type="checkbox" value="@hero.UserId" name="selectedEvidence" /> @hero.Alias <br />
 		}

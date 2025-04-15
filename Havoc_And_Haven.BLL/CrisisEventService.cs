@@ -1,59 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havoc_And_Haven.DAL;
+﻿using Havoc_And_Haven.DAL;
 using Havoc_And_Haven.Models;
+using System;
+using System.Collections.Generic;
 
-namespace Havoc_And_Haven.BLL {
-    public class CrisisEventService {
-        private readonly CrisisEventRepository _repo;
+namespace Havoc_And_Haven.BLL
+{
+    public class CrisisEventService
+    {
+        private readonly CrisisEventRepository _crisisEventRepository;
 
-        public CrisisEventService(CrisisEventRepository repo) {
-            _repo = repo;
+        public CrisisEventService(CrisisEventRepository crisisEventRepository)
+        {
+            _crisisEventRepository = crisisEventRepository;
         }
 
-        public void CreateCrisis(CrisisEvent crisisEvent) {
-            if (crisisEvent == null) {
-                throw new ArgumentNullException(nameof(crisisEvent));
-            }
-            _repo.Add(crisisEvent);
+        public List<CrisisEvent> GetAllCrisisEvents()
+        {
+            return _crisisEventRepository.GetAll();
         }
 
-        public List<CrisisEvent> GetAllCrises() {
-            return _repo.GetAll();
+        public CrisisEvent GetCrisisEventById(int id)
+        {
+            return _crisisEventRepository.GetById(id);
         }
 
-        public CrisisEvent GetCrisisById(int id) {
-            return _repo.GetById(id);
+        public void CreateCrisisEvent(CrisisEvent crisisEvent)
+        {
+            _crisisEventRepository.Add(crisisEvent);
         }
 
-        public void UpdateCrisis(CrisisEvent crisisEvent) {
-            if (crisisEvent.CrisisId <= 0) {
-                throw new ArgumentException("Invalid crisis ID.");
-            }
-            _repo.Update(crisisEvent);
+        public void UpdateCrisisEvent(CrisisEvent crisisEvent)
+        {
+            _crisisEventRepository.Update(crisisEvent);
         }
 
-        public void DeleteCrisis(int id) {
-            _repo.Delete(id);
+        public void DeleteCrisisEvent(int id)
+        {
+            _crisisEventRepository.Delete(id);
         }
 
-        public List<User> GetHeroes() {
-            return _repo.GetHeroes();
+        public List<Users> GetHeroes()
+        {
+            return _crisisEventRepository.GetHeroes();
         }
 
-        public List<User> GetVillains() {
-            return _repo.GetVillains();
+        public List<Users> GetVillains()
+        {
+            return _crisisEventRepository.GetVillains();
         }
 
-        public List<Location> GetAllLocations() {
-            return _repo.GetAllLocations();
+        public List<Location> GetAllLocations()
+        {
+            return _crisisEventRepository.GetAllLocations();
         }
 
-        public List<User> GetUsersByIds(List<int> ids) {
-            return _repo.GetUsersByIds(ids);
+        public List<Users> GetUsersByIds(List<int> ids)
+        {
+            return _crisisEventRepository.GetUsersByIds(ids);
         }
     }
 }

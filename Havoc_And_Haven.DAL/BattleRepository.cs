@@ -1,4 +1,5 @@
 ﻿using Havoc_And_Haven.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Havoc_And_Haven.DAL {
@@ -9,11 +10,16 @@ namespace Havoc_And_Haven.DAL {
             _context = context;
         }
 
-        public List<Battle> GetAll() {
+        public List<Battle> GetAll()
+        {
             return _context.Battles
                 .Include(b => b.CrisisEvent)
+                    .ThenInclude(ce => ce.Heroes)
+                .Include(b => b.CrisisEvent)
+                    .ThenInclude(ce => ce.Villains)
                 .ToList();
         }
+
 
         public void Add(Battle battle) {
             _context.Battles.Add(battle);
