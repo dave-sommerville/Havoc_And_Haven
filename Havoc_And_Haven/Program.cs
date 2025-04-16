@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Havoc_And_Haven.DAL;
 using Havoc_And_Haven.BLL;
+using Havoc_And_Haven.BL;
 
 namespace Havoc_And_Haven
 {
@@ -17,6 +18,21 @@ namespace Havoc_And_Haven
 
             builder.Services.AddScoped<LocationRepository>();
             builder.Services.AddScoped<LocationService>();
+
+            builder.Services.AddScoped<BattleRepository>();
+            builder.Services.AddScoped<BattleService>();
+
+            builder.Services.AddScoped<CrisisEventRepository>();
+            builder.Services.AddScoped<CrisisEventService>();
+
+            builder.Services.AddScoped<HeadquartersRepository>();
+            builder.Services.AddScoped<HeadquartersService>();
+
+            builder.Services.AddScoped<LairRepository>();
+            builder.Services.AddScoped<LairService>();
+
+            builder.Services.AddScoped<UsersRepository>();
+            //builder.Services.AddScoped<UsersService>();
 
             var app = builder.Build();
 
