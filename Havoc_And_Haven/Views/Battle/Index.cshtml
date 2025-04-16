@@ -8,6 +8,8 @@
             <th>Incident Begin Date</th>
             <th>Winner</th>
             <th>Crisis Event</th>
+            <th>Heros</th>
+            <th>Villians</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -19,8 +21,18 @@
                 <td>@battle.Winner</td>
                 <td>@battle.CrisisEvent.Title</td>
                 <td>
-                    <a href="/Battle/Details/@battle.BattleId">View</a>
-                    <form asp-action="Delete" method="post" style="display:inline;">
+                    @foreach (var hero in battle.CrisisEvent?.Heroes ?? new List<Users>())
+                    {
+                        <span>@hero.Alias</span>                    }
+                </td>
+                <td>
+                    @foreach (var villain in battle.CrisisEvent.Villains)
+                    {
+                        <span>@villain.Alias</span>
+                    }
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post">
                         <input type="hidden" name="id" value="@battle.BattleId" />
                         <button type="submit">Delete</button>
                     </form>

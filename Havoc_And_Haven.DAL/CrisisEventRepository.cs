@@ -49,8 +49,6 @@ namespace Havoc_And_Haven.DAL
                 existingCrisis.IsResolved = crisis.IsResolved;
                 _context.SaveChanges();
             }
-            //_context.CrisisEvents.Update(crisis);
-            //_context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -63,23 +61,19 @@ namespace Havoc_And_Haven.DAL
             }
         }
 
-        public List<Users> GetHeroes()
-        {
+        public List<Users> GetHeroes() {
             return _context.Users.Where(u => u.Role == "Hero").ToList();
         }
 
-        public List<Users> GetVillains()
-        {
+        public List<Users> GetVillains() {
             return _context.Users.Where(u => u.Role == "Villain").ToList();
         }
 
-        public List<Location> GetAllLocations()
-        {
+        public List<Location> GetAllLocations() {
             return _context.Locations.ToList();
         }
 
-        public List<Users> GetUsersByIds(List<int> ids)
-        {
+        public List<Users> GetUsersByIds(List<int> ids) {
             return _context.Users.Where(u => ids.Contains(u.UserId)).ToList();
         }
     }

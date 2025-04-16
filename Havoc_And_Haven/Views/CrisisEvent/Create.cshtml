@@ -29,27 +29,5 @@
         <label asp-for="IsResolved" class="form-check-label"></label>
     </div>
     <span asp-validation-for="IsResolved" class="text-danger"></span>
-
-
-    @* <div> *@
-    @*     <label for="Heroes">Heroes</label> *@
-    @*     <select multiple id="Heroes" name="Heroes"> *@
-    @*         @foreach (var hero in ViewData["Heroes"] as List<Havoc_And_Haven.Models.Users>) *@
-    @*         { *@
-    @*             <option value="@hero.UserId">@hero.Alias</option> *@
-    @*         } *@
-    @*     </select> *@
-    @* </div> *@
-
-    @* <div> *@
-    @*     <label for="Villains">Villains</label> *@
-    @*     <select multiple id="Villains" name="Villains"> *@
-    @*         @foreach (var villain in ViewData["Villains"] as List<Havoc_And_Haven.Models.Users>) *@
-    @*         { *@
-    @*             <option value="@villain.UserId">@villain.Alias</option> *@
-    @*         } *@
-    @*     </select> *@
-    @* </div> *@
-
     <button type="submit">Create Crisis Event</button>
 </form>

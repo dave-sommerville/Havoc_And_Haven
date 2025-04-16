@@ -15,24 +15,6 @@
         <th>Location:</th>
         <td>@Model.Location?.Neighborhood</td>
     </tr>
-    @* <tr> *@
-    @*     <th>Heroes:</th> *@
-    @*     <td> *@
-    @*         @foreach (var hero in Model.Heroes) *@
-    @*         { *@
-    @*             @hero.Alias <br /> *@
-    @*         } *@
-    @*     </td> *@
-    @* </tr> *@
-    @* <tr> *@
-    @*     <th>Villains:</th> *@
-    @*     <td> *@
-    @*         @foreach (var villain in Model.Villains) *@
-    @*         { *@
-    @*             @villain.Alias <br /> *@
-    @*         } *@
-    @*     </td> *@
-    @* </tr> *@
 </table>
 
 <button type="button" onclick="window.location.href='/CrisisEvent/Edit/@Model.CrisisId'">Edit</button>

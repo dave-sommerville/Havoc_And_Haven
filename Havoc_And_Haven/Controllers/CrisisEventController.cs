@@ -25,9 +25,6 @@ namespace Havoc_And_Haven.Controllers
         public IActionResult Create()
         {
             ViewBag.Locations = _crisisService.GetAllLocations();
-            //ViewData["Locations"] = ViewBag.Locations;
-            ViewBag.Heroes = _crisisService.GetHeroes();
-            ViewBag.Villains = _crisisService.GetVillains();
             return View();
         }
 
@@ -36,16 +33,11 @@ namespace Havoc_And_Haven.Controllers
         {
             if (ModelState.IsValid)
             {
-                //crisisEvent.Heroes = _crisisService.GetUsersByIds(SelectedHeroes);
-                //crisisEvent.Villains = _crisisService.GetUsersByIds(SelectedVillains);
                 _crisisService.CreateCrisisEvent(crisisEvent);
                 return RedirectToAction("Index");
             }
 
             ViewBag.Locations = _crisisService.GetAllLocations();
-            //ViewData["Locations"] = ViewBag.Locations;
-            //ViewBag.Heroes = _crisisService.GetHeroes();
-            //ViewBag.Villains = _crisisService.GetVillains();
             return View(crisisEvent);
         }
 
@@ -59,9 +51,6 @@ namespace Havoc_And_Haven.Controllers
             }
 
             ViewBag.Locations = _crisisService.GetAllLocations();
-            //ViewData["Locations"] = ViewBag.Locations;
-            //ViewBag.Heroes = _crisisService.GetHeroes();
-            //ViewBag.Villains = _crisisService.GetVillains();
             return View(crisis);
         }
 
@@ -70,17 +59,11 @@ namespace Havoc_And_Haven.Controllers
         {
             if (ModelState.IsValid)
             {
-                //crisisEvent.Heroes = _crisisService.GetUsersByIds(SelectedHeroes);
-                //crisisEvent.Villains = _crisisService.GetUsersByIds(SelectedVillains);
-
                 _crisisService.UpdateCrisisEvent(crisisEvent);
                 return RedirectToAction("Index");
             } 
 
             ViewBag.Locations = _crisisService.GetAllLocations();
-            //ViewData["Locations"] = ViewBag.Locations;
-            //ViewBag.Heroes = _crisisService.GetHeroes();
-            //ViewBag.Villains = _crisisService.GetVillains();
             return View(crisisEvent);
         }
 

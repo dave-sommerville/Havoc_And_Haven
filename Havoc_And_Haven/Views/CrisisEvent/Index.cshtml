@@ -8,8 +8,6 @@
             <th>Title</th>
             <th>Date</th>
             <th>Location</th>
-            @* <th>Heroes</th> *@
-            @* <th>Villains</th> *@
             <th>Actions</th>
         </tr>
     </thead>
@@ -20,20 +18,8 @@
                 <td>@crisis.Title</td>
                 <td>@crisis.CreatedAt.ToShortDateString()</td>
                 <td>@crisis.Location?.Neighborhood</td>
-                @* <td> *@
-                @*     @foreach (Users hero in crisis.Heroes) *@
-                @*     { *@
-                @*         @hero.Alias <br /> *@
-                @*     } *@
-                @* </td> *@
-                @* <td> *@
-                @*     @foreach (Users villain in crisis.Villains) *@
-                @*     { *@
-                @*         @villain.Alias <br /> *@
-                @*     } *@
-                @* </td> *@
                 <td>
-                    <a href="/CrisisEvent/Detail/@crisis.CrisisId">View</a>
+                    <button type="button" onclick="window.location.href='/CrisisEvent/Detail/@crisis.CrisisId'">View</button><br />
                     <form asp-action="Delete">
                         <input type="hidden" name="id" value="@crisis.CrisisId" />
                         <button type="submit">Delete</button>
@@ -45,5 +31,3 @@
 </table>
 
 <button type="button" onclick="window.location.href='/CrisisEvent/Create'">Create</button>
-@* <button type="button" onclick="window.location.href='/CrisisEvent/Edit'">Edit</button> *@
-
