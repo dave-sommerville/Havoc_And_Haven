@@ -7,19 +7,19 @@ using Havoc_And_Haven.Models;
 
 namespace Havoc_And_Haven.DAL
 {
-    public  class UserRepository
+    public  class UsersRepository
     {
         private readonly HavocAndHavenDbContext _context;
 
-        public UserRepository(HavocAndHavenDbContext context)
+        public UsersRepository(HavocAndHavenDbContext context)
         {
             _context = context;
         }   
-        public List<User> GetAllUsers()
-        {
-            return _context.User
-                .Include(u => u.Alias)
-                .Include(u => u.Name);
-        }
+        //public List<Users> GetAllUsers()
+        ////{
+        ////    return _context.Users
+        ////        .Include(u => u.Alias)
+        ////        .Include(u => u.Name);
+        ////}
     }
 }

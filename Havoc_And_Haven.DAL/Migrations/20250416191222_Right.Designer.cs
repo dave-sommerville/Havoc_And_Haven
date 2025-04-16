@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Havoc_And_Haven.DAL.Migrations
 {
     [DbContext(typeof(HavocAndHavenDbContext))]
-    [Migration("20250415222457_Update-Crisis")]
-    partial class UpdateCrisis
+    [Migration("20250416191222_Right")]
+    partial class Right
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,8 +66,14 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Property<int>("CrisisId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("HeroId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("IncidentBegan")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("VillainId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Winner")
                         .HasMaxLength(100)
@@ -76,6 +82,10 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.HasKey("BattleId");
 
                     b.HasIndex("CrisisId");
+
+                    b.HasIndex("HeroId");
+
+                    b.HasIndex("VillainId");
 
                     b.ToTable("Battles");
                 });
@@ -232,9 +242,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Property<int?>("LairId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LairId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -257,8 +264,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.HasIndex("HeadquartersId");
 
                     b.HasIndex("LairId");
-
-                    b.HasIndex("LairId1");
 
                     b.ToTable("Users");
                 });
@@ -301,7 +306,21 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Havoc_And_Haven.Models.Users", "Hero")
+                        .WithMany()
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Havoc_And_Haven.Models.Users", "Villain")
+                        .WithMany()
+                        .HasForeignKey("VillainId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("CrisisEvent");
+
+                    b.Navigation("Hero");
+
+                    b.Navigation("Villain");
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.CrisisEvent", b =>
@@ -344,12 +363,8 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .HasForeignKey("HeadquartersId");
 
                     b.HasOne("Havoc_And_Haven.Models.Lair", "Lair")
-                        .WithMany()
-                        .HasForeignKey("LairId");
-
-                    b.HasOne("Havoc_And_Haven.Models.Lair", null)
                         .WithMany("Villains")
-                        .HasForeignKey("LairId1");
+                        .HasForeignKey("LairId");
 
                     b.Navigation("Headquarters");
 

@@ -5,21 +5,21 @@
 namespace Havoc_And_Haven.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Updatebattleid : Migration
+    public partial class Right : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Users_Battles_BattleId",
+                name: "FK_Users_Lairs_LairId1",
                 table: "Users");
 
             migrationBuilder.DropIndex(
-                name: "IX_Users_BattleId",
+                name: "IX_Users_LairId1",
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "BattleId",
+                name: "LairId1",
                 table: "Users");
         }
 
@@ -27,22 +27,22 @@ namespace Havoc_And_Haven.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "BattleId",
+                name: "LairId1",
                 table: "Users",
                 type: "int",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_BattleId",
+                name: "IX_Users_LairId1",
                 table: "Users",
-                column: "BattleId");
+                column: "LairId1");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Users_Battles_BattleId",
+                name: "FK_Users_Lairs_LairId1",
                 table: "Users",
-                column: "BattleId",
-                principalTable: "Battles",
-                principalColumn: "BattleId");
+                column: "LairId1",
+                principalTable: "Lairs",
+                principalColumn: "LairId");
         }
     }
 }

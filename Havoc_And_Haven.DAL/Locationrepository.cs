@@ -46,9 +46,11 @@ namespace Havoc_And_Haven.DAL
         }
         public void UpdateLocation(Location location)
         {
-            Location exsisting = _context.Locations.Find(location.LocationId);
+            Location? exsisting = _context.Locations.Find(location.LocationId);
             if (exsisting != null)
             {
+                exsisting.Type = location.Type;
+                exsisting.Neighborhood = location.Neighborhood;
                 exsisting.Address = location.Address;
                 exsisting.Description = location.Description;
 
@@ -59,17 +61,16 @@ namespace Havoc_And_Haven.DAL
             {
                 Console.WriteLine("The location was not found");
             }
-
         }
-        public void Deletelocation(Location Location)
+
+        public void Deletelocation(int locationId)
         {
-            Location? _location = _context.Locations.Find(Location.LocationId);
-            if (Location != null)
+            Location? location = _context.Locations.Find(locationId);
+            if (location != null)
             {
-                _context.Locations.Remove(Location);
+                _context.Locations.Remove(location);
                 _context.SaveChanges();
             }
-
         }
     }
 }

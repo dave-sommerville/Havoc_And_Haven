@@ -34,7 +34,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CrisisEventHeroes");
+                    b.ToTable("CrisisEventHeroes", (string)null);
                 });
 
             modelBuilder.Entity("CrisisEventVillains", b =>
@@ -49,7 +49,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CrisisEventVillains");
+                    b.ToTable("CrisisEventVillains", (string)null);
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.Battle", b =>
@@ -63,8 +63,14 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Property<int>("CrisisId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("HeroId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("IncidentBegan")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("VillainId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Winner")
                         .HasMaxLength(100)
@@ -74,7 +80,11 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("CrisisId");
 
-                    b.ToTable("Battles");
+                    b.HasIndex("HeroId");
+
+                    b.HasIndex("VillainId");
+
+                    b.ToTable("Battles", (string)null);
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.CrisisEvent", b =>
@@ -103,7 +113,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("CrisisEvents");
+                    b.ToTable("CrisisEvents", (string)null);
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.Headquarters", b =>
@@ -134,7 +144,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("Headquarters");
+                    b.ToTable("Headquarters", (string)null);
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.Lair", b =>
@@ -164,7 +174,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("Lairs");
+                    b.ToTable("Lairs", (string)null);
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.Location", b =>
@@ -197,7 +207,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasKey("LocationId");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.Users", b =>
@@ -229,9 +239,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Property<int?>("LairId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LairId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -255,9 +262,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasIndex("LairId");
 
-                    b.HasIndex("LairId1");
-
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("CrisisEventHeroes", b =>
@@ -298,7 +303,21 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Havoc_And_Haven.Models.Users", "Hero")
+                        .WithMany()
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Havoc_And_Haven.Models.Users", "Villain")
+                        .WithMany()
+                        .HasForeignKey("VillainId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("CrisisEvent");
+
+                    b.Navigation("Hero");
+
+                    b.Navigation("Villain");
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.CrisisEvent", b =>
@@ -341,12 +360,8 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .HasForeignKey("HeadquartersId");
 
                     b.HasOne("Havoc_And_Haven.Models.Lair", "Lair")
-                        .WithMany()
-                        .HasForeignKey("LairId");
-
-                    b.HasOne("Havoc_And_Haven.Models.Lair", null)
                         .WithMany("Villains")
-                        .HasForeignKey("LairId1");
+                        .HasForeignKey("LairId");
 
                     b.Navigation("Headquarters");
 

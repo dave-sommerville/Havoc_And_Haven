@@ -26,7 +26,7 @@ namespace Havoc_And_Haven.DAL
             modelBuilder.Entity<CrisisEvent>().HasKey(e => e.CrisisId);
             modelBuilder.Entity<Battle>().HasKey(b => b.BattleId);
 
-                // CrisisEvent relationships
+            // CrisisEvent relationships
             modelBuilder.Entity<CrisisEvent>()
                 .HasOne(ce => ce.Location)
                 .WithMany(l => l.CrisisEvents)
@@ -40,6 +40,7 @@ namespace Havoc_And_Haven.DAL
                     j => j.HasOne<Users>().WithMany().HasForeignKey("UserId"),
                     j => j.HasOne<CrisisEvent>().WithMany().HasForeignKey("CrisisEventId")
                 );
+
 
             // Villains many-to-many relationship
             modelBuilder.Entity<CrisisEvent>()
@@ -57,15 +58,30 @@ namespace Havoc_And_Haven.DAL
                 .WithMany()
                 .HasForeignKey(b => b.CrisisId);
 
+            modelBuilder.Entity<Battle>()
+                .HasOne(b => b.Hero)
+                .WithMany()
+                .HasForeignKey(b => b.HeroId)
+                .OnDelete(DeleteBehavior.Restrict); // Optional: to avoid cascade delete issues
+
+            modelBuilder.Entity<Battle>()
+                .HasOne(b => b.Villain)
+                .WithMany()
+                .HasForeignKey(b => b.VillainId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // User relationships
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Headquarters)
                 .WithMany(h => h.Heroes)
-                .HasForeignKey(u => u.HeadquartersId);
+                .HasForeignKey(u => u.HeadquartersId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Lair)
-                .WithMany()
-                .HasForeignKey(u => u.LairId);
+                .WithMany(l => l.Villains) 
+                .HasForeignKey(u => u.LairId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // Location relationships
             modelBuilder.Entity<Location>()
@@ -128,5 +144,3 @@ namespace Havoc_And_Haven.DAL
         }
     }
 }
-
-
