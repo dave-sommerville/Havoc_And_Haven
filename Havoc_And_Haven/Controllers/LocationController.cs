@@ -36,6 +36,10 @@ namespace Havoc_And_Haven.Controllers
         {
             return View(new Location());
         }
-
+        [HttpGet]
+        public IActionResult DeleteLocation(int id)
+        {
+            Location? location = LocationService.GetLocationById(Id);
+        }
     }
     
