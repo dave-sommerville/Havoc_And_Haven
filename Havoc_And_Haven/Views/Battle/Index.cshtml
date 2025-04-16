@@ -19,18 +19,9 @@
             <tr>
                 <td>@battle.IncidentBegan.ToShortDateString()</td>
                 <td>@battle.Winner</td>
-                <td>@battle.CrisisEvent.Title</td>
-                <td>
-                    @foreach (var hero in ViewBag.Heros)
-                    {
-                        <span>@hero.Alias,</span>                    }
-                </td>
-                <td>
-                    @foreach (var villain in ViewBag.Villians )
-                    {
-                        <span>@villain.Alias,</span>
-                    }
-                </td>
+                <td>@battle.CrisisEvent?.Title</td>
+                <td>@battle.Hero?.Alias</td>
+                <td>@battle.Villain?.Alias</td>
                 <td>
                     <form asp-action="Delete" method="post">
                         <input type="hidden" name="id" value="@battle.BattleId" />
