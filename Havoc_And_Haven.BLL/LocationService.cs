@@ -25,7 +25,7 @@ namespace Havoc_And_Haven.BLL
         {
             return _repo.GetLocationById(Id);
         }
-        public void create(Location location) {
+        public void Create(Location location) {
             _repo.AddLocation(location);
         }
         public void Edit(Location location)

@@ -9,9 +9,9 @@ namespace Havoc_And_Haven.Controllers
     {
         private readonly LocationService _LocationService;
 
-        public LocationController ( LocationService locationservice)
+        public LocationController(LocationService locationservice)
         {
-            
+
             _LocationService = locationservice;
         }
         public IActionResult Index()
@@ -19,5 +19,23 @@ namespace Havoc_And_Haven.Controllers
             List<Location> locations = _LocationService.GetAllLocations();
             return View(locations);
         }
+        [HttpGet]
+        public IActionResult Create() {
+            return View(new Location());
+        }
+        [HttpPost]
+        public IActionResult Create(Location location) {
+            if (ModelState.IsValid) {
+                _LocationService.Create(location);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(location);
+        }
+        [HttpGet]
+        public IActionResult Update()
+        {
+            return View(new Location());
+        }
+
     }
-}
+    
