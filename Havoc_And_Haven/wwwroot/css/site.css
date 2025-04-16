@@ -27,6 +27,10 @@ a, button {
     text-decoration: none;
     font-style: inherit;
     color: inherit;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button {
@@ -83,7 +87,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-button {
+
+label {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.button {
     border: none;
     text-decoration: none;
     height: 60px;
@@ -91,7 +100,7 @@ button {
     background-color: #dd6900;
     margin: 5px;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
 }
 

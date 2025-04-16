@@ -22,7 +22,7 @@
 
 					<form asp-action="DeleteLairConfirmed" method="post" style="display:inline;">
 						<input type="hidden" name="id" value="@lair.LairId" />
-						<button type="submit" class="btn btn-danger">Delete</button>
+						<button type="submit" class="button">Delete</button>
 					</form>
 				</td>
 				@* <td>@lair.Location.Address</td> *@
@@ -32,4 +32,4 @@
 		}
 	</tbody>
 </table>
-<a href="@Url.Action("Create", "Lair")" class="btn btn-primary">Add Lair</a>
+<a href="@Url.Action("Create", "Lair")" class="button">Add Lair</a>
