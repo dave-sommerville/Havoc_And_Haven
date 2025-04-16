@@ -39,9 +39,21 @@ namespace Havoc_And_Haven.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Edit()
         {
             return View(new Location());
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Location location)
+        {
+            if (ModelState.IsValid)
+            {
+                _LocationService.Edit(location);
+                return RedirectToAction("Index");
+            }
+
+            return View(location);
         }
 
         [HttpGet]
@@ -49,6 +61,20 @@ namespace Havoc_And_Haven.Controllers
         {
             Location? location = _LocationService.GetLocationById(id);
             return View(location);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteLocationConfirmed(int id)
+        {
+            Location? location = _LocationService.GetLocationById(id);
+            if (location == null)
+            {
+                return NotFound();
+            }
+
+            _LocationService.delete(id);
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -61,15 +61,14 @@ namespace Havoc_And_Haven.DAL
             }
 
         }
-        public void Deletelocation(Location Location)
+        public void Deletelocation(int locationId)
         {
-            Location? _location = _context.Locations.Find(Location.LocationId);
-            if (Location != null)
+            Location? location = _context.Locations.Find(locationId);
+            if (location != null)
             {
-                _context.Locations.Remove(Location);
+                _context.Locations.Remove(location);
                 _context.SaveChanges();
             }
-
         }
     }
 }
