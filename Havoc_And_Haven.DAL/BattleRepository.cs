@@ -10,15 +10,6 @@ namespace Havoc_And_Haven.DAL {
             _context = context;
         }
 
-        //public List<Battle> GetAll()
-        //{
-        //    return _context.Battles
-        //        .Include(b => b.CrisisEvent)
-        //            .ThenInclude(ce => ce.Heroes)
-        //        .Include(b => b.CrisisEvent)
-        //            .ThenInclude(ce => ce.Villains)
-        //        .ToList();
-        //}
         public List<Battle> GetAll() {
             return _context.Battles
                 .Include(b => b.CrisisEvent)
