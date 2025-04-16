@@ -19,13 +19,13 @@ namespace Havoc_And_Haven.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddLair() {
+        public IActionResult Create() {
             ViewBag.Locations = _locationService.GetAllLocations();
 
             return View(new Lair());
         }
         [HttpPost]
-        public IActionResult AddLair(Lair lair) {
+        public IActionResult Create(Lair lair) {
             if (ModelState.IsValid) {
                 lair.Location = _locationService.GetLocationById(lair.LocationId);
 
@@ -39,7 +39,7 @@ namespace Havoc_And_Haven.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateHeadquarters(int id) {
+        public IActionResult Edit(int id) {
             Lair? lair = _lairService.GetAllLairs().FirstOrDefault(r => r.LairId == id);
             if (lair == null) {
                 return NotFound();
@@ -51,7 +51,7 @@ namespace Havoc_And_Haven.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateHeadquarters(Lair lair) {
+        public IActionResult Edit(Lair lair) {
             if (ModelState.IsValid) {
                 _lairService.UpdateLair(lair);
                 return RedirectToAction("Index");
@@ -63,7 +63,7 @@ namespace Havoc_And_Haven.Controllers
         }
 
         [HttpGet]
-        public IActionResult DeleteHeadquarter(int id) {
+        public IActionResult DeleteLair(int id) {
             Lair? lair = _lairService.GetLairById(id);
             if (lair == null) {
                 return NotFound();
@@ -73,7 +73,7 @@ namespace Havoc_And_Haven.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteHeadquarterConfirmed(int id) {
+        public IActionResult DeleteLairConfirmed(int id) {
             Lair? lair = _lairService.GetLairById(id);
             if (lair == null) {
                 return NotFound();

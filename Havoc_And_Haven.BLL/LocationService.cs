@@ -33,10 +33,9 @@ namespace Havoc_And_Haven.BLL
             _repo.UpdateLocation(location);
         }
 
-        public void delete(Location Id)
+        public void delete(int Id)
         {
             _repo.Deletelocation(Id);
         }
-
     }
 }
