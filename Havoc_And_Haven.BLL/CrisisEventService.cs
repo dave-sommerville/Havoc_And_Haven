@@ -39,13 +39,11 @@ namespace Havoc_And_Haven.BLL
             _crisisEventRepository.Delete(id);
         }
 
-        public List<Users> GetHeroes()
-        {
+        public List<Users> GetHeroes() {
             return _crisisEventRepository.GetHeroes();
         }
 
-        public List<Users> GetVillains()
-        {
+        public List<Users> GetVillains() {
             return _crisisEventRepository.GetVillains();
         }
 
@@ -54,8 +52,7 @@ namespace Havoc_And_Haven.BLL
             return _crisisEventRepository.GetAllLocations();
         }
 
-        public List<Users> GetUsersByIds(List<int> ids)
-        {
+        public List<Users> GetUsersByIds(List<int> ids) {
             return _crisisEventRepository.GetUsersByIds(ids);
         }
     }

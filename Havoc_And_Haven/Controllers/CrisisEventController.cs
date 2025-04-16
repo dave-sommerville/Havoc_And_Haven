@@ -24,27 +24,20 @@ namespace Havoc_And_Haven.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Locations = new SelectList(_crisisService.GetAllLocations(), "LocationId", "Neighborhood");
-            ViewBag.Heroes = _crisisService.GetHeroes();
-            ViewBag.Villains = _crisisService.GetVillains();
+            ViewBag.Locations = _crisisService.GetAllLocations();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CrisisEvent crisisEvent, List<int> SelectedHeroes, List<int> SelectedVillains)
+        public IActionResult Create(CrisisEvent crisisEvent)
         {
             if (ModelState.IsValid)
             {
-                crisisEvent.Heroes = _crisisService.GetUsersByIds(SelectedHeroes);
-                crisisEvent.Villains = _crisisService.GetUsersByIds(SelectedVillains);
-
                 _crisisService.CreateCrisisEvent(crisisEvent);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Locations = new SelectList(_crisisService.GetAllLocations(), "LocationId", "Neighborhood");
-            ViewBag.Heroes = _crisisService.GetHeroes();
-            ViewBag.Villains = _crisisService.GetVillains();
+            ViewBag.Locations = _crisisService.GetAllLocations();
             return View(crisisEvent);
         }
 
@@ -57,27 +50,20 @@ namespace Havoc_And_Haven.Controllers
                 return Content("Not Found");
             }
 
-            ViewBag.Locations = new SelectList(_crisisService.GetAllLocations(), "LocationId", "Neighborhood", crisis.LocationId);
-            ViewBag.Heroes = _crisisService.GetHeroes();
-            ViewBag.Villains = _crisisService.GetVillains();
+            ViewBag.Locations = _crisisService.GetAllLocations();
             return View(crisis);
         }
 
         [HttpPost]
-        public IActionResult Edit(CrisisEvent crisisEvent, List<int> SelectedHeroes, List<int> SelectedVillains)
+        public IActionResult Edit(CrisisEvent crisisEvent)
         {
             if (ModelState.IsValid)
             {
-                crisisEvent.Heroes = _crisisService.GetUsersByIds(SelectedHeroes);
-                crisisEvent.Villains = _crisisService.GetUsersByIds(SelectedVillains);
-
                 _crisisService.UpdateCrisisEvent(crisisEvent);
                 return RedirectToAction("Index");
-            }
+            } 
 
-            ViewBag.Locations = new SelectList(_crisisService.GetAllLocations(), "LocationId", "Neighborhood", crisisEvent.LocationId);
-            ViewBag.Heroes = _crisisService.GetHeroes();
-            ViewBag.Villains = _crisisService.GetVillains();
+            ViewBag.Locations = _crisisService.GetAllLocations();
             return View(crisisEvent);
         }
 

@@ -29,5 +29,17 @@ namespace Havoc_And_Haven.DAL {
         public List<CrisisEvent> GetAllCrises() {
             return _context.CrisisEvents.ToList();
         }
+
+        public List<Users> GetHeroes() {
+            return _context.Users.Where(u => u.Role == "Hero").ToList();
+        }
+
+        public List<Users> GetVillains() {
+            return _context.Users.Where(u => u.Role == "Villain").ToList();
+        }
+
+        public List<Users> GetUsersByIds(List<int> ids) {
+            return _context.Users.Where(u => ids.Contains(u.UserId)).ToList();
+        }
     }
 }

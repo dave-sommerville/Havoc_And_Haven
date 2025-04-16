@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Identity;
 public class PrivateProfileVMController : Controller
 {
     private readonly HavocAndHavenDbContext _context;
-    private readonly UserManager<User> _userManager;
+    private readonly UserManager<Users> _userManager;
 
-    public PrivateProfileVMController(HavocAndHavenDbContext context, UserManager<User> userManager)
+    public PrivateProfileVMController(HavocAndHavenDbContext context, UserManager<Users> userManager)
     {
         _context = context;
         _userManager = userManager;
     }
     public async Task<IActionResult> PrivateProfile(int id)
     {
-        User user = await _context.Users
+        Users user = await _context.Users
             .Include(u => u.Headquarters)
                 .ThenInclude(h => h.Location)
             .Include(u => u.Lair)

@@ -31,12 +31,25 @@ namespace Havoc_And_Haven.DAL
                 .HasOne(ce => ce.Location)
                 .WithMany(l => l.CrisisEvents)
                 .HasForeignKey(ce => ce.LocationId);
+
             modelBuilder.Entity<CrisisEvent>()
                 .HasMany(ce => ce.Heroes)
-                .WithMany();
+                .WithMany() // Assuming Users (Heroes) have a collection of CrisisEvents
+                .UsingEntity<Dictionary<string, object>>(
+                    "CrisisEventHeroes", // This will be the name of the join table
+                    j => j.HasOne<Users>().WithMany().HasForeignKey("UserId"),
+                    j => j.HasOne<CrisisEvent>().WithMany().HasForeignKey("CrisisEventId")
+                );
+
+            // Villains many-to-many relationship
             modelBuilder.Entity<CrisisEvent>()
                 .HasMany(ce => ce.Villains)
-                .WithMany();
+                .WithMany() // Assuming Users (Villains) have a collection of CrisisEvents
+                .UsingEntity<Dictionary<string, object>>(
+                    "CrisisEventVillains", // This will be the name of the join table
+                    j => j.HasOne<Users>().WithMany().HasForeignKey("UserId"),
+                    j => j.HasOne<CrisisEvent>().WithMany().HasForeignKey("CrisisEventId")
+                );
 
             // Battle relationships
             modelBuilder.Entity<Battle>()

@@ -18,7 +18,7 @@ namespace Havoc_And_Haven.Controllers {
 
         [HttpGet]
         public IActionResult Create() {
-            ViewBag.Crises = new SelectList(_battleService.GetAllCrises(), "CrisisId", "Title");
+            ViewBag.Crises = _battleService.GetAllCrises();
             return View();
         }
 
@@ -27,9 +27,15 @@ namespace Havoc_And_Haven.Controllers {
             if (ModelState.IsValid) {
                 _battleService.CreateBattle(battle);
                 return RedirectToAction("Index");
+            } else {
+                foreach (var value in ModelState.Values) {
+                    foreach (var error in value.Errors) {
+                        Console.WriteLine(error.ErrorMessage); 
+                    }
+                }
             }
 
-            ViewBag.Crises = new SelectList(_battleService.GetAllCrises(), "CrisisId", "Title", battle.CrisisId);
+            ViewBag.Crises = _battleService.GetAllCrises();
             return View(battle);
         }
     }

@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Havoc_And_Haven.Controllers
 {
-    public class HeadquartersController : Controller
-    {
+    public class HeadquartersController : Controller {
         private readonly HeadquartersService _headquartersService;
         //private readonly LocationService _locationService;
 
@@ -18,33 +17,26 @@ namespace Havoc_And_Haven.Controllers
             _headquartersService = headquartersService;
             //_locationService = locationService;
         }
-
-        public IActionResult Index()
-        {
+        public IActionResult Index() {
             List<Headquarters> headquarters = _headquartersService.GetAllHeadquarters();
             return View(headquarters);
         }
-
         [HttpGet]
         public IActionResult Create()
         {
             //ViewBag.Locations = _locationService.GetAllLocation();
-
             return View(new Headquarters());
         }
-
         [HttpPost]
         public IActionResult Create(Headquarters headquarter)
         {
             if (ModelState.IsValid)
             {
                 //headquarter.Location = _locationService.GetLocationById(headquarter.LocationId);
-
                 _headquartersService.AddHeadquarter(headquarter);
 
                 return RedirectToAction("Index");
             }
-
             //ViewBag.Locations = _locationService.GetAllLocation();
             return View(headquarter);
         }
@@ -59,10 +51,8 @@ namespace Havoc_And_Haven.Controllers
             }
 
             //ViewBag.Locations = _locationService.GetAllLocation();
-
             return View(headquarter);
         }
-
         [HttpPost]
         public IActionResult Edit(Headquarters headquarter)
         {
@@ -73,16 +63,13 @@ namespace Havoc_And_Haven.Controllers
             }
 
             //ViewBag.Locations = _locationService.GetAllLocation();
-
             return View(headquarter);
         }
 
         [HttpGet]
-        public IActionResult DeleteHeadquarter(int id)
-        {
+        public IActionResult DeleteHeadquarter(int id) {
             Headquarters? headquarter = _headquartersService.GetHeadquarterById(id);
-            if (headquarter == null)
-            {
+            if (headquarter == null) {
                 return NotFound();
             }
 
@@ -90,11 +77,9 @@ namespace Havoc_And_Haven.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteHeadquarterConfirmed(int id)
-        {
+        public IActionResult DeleteHeadquarterConfirmed(int id) {
             Headquarters? headquarter = _headquartersService.GetHeadquarterById(id);
-            if (headquarter == null)
-            {
+            if (headquarter == null) {
                 return NotFound();
             }
 

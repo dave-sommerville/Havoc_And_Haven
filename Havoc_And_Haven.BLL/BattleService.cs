@@ -23,6 +23,18 @@ namespace Havoc_And_Haven.BL
         public List<CrisisEvent> GetAllCrises() {
             return _repo.GetAllCrises();
         }
+
+        public List<Users> GetHeroes() {
+            return _repo.GetHeroes();
+        }
+
+        public List<Users> GetVillains() {
+            return _repo.GetVillains();
+        }
+
+        public List<Users> GetUsersByIds(List<int> ids) {
+            return _repo.GetUsersByIds(ids);
+        }
     }
 
 }
