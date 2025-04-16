@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Havoc_And_Haven.Models;
 using Havoc_And_Haven.DAL;
+using Microsoft.EntityFrameworkCore;
+
 
 
 namespace Havoc_And_Haven.DAL
@@ -19,16 +21,15 @@ namespace Havoc_And_Haven.DAL
             _context = context;
 
         }
-        public List<Locations> GetallLocations()
+        public List<Location> GetallLocations()
         {
             return _context.Locations.ToList();
         }
-        public Location GetLocationbyId(int id)
+        public Location? GetLocationById(int id)
         {
             return _context.Locations
-                .FirstOrdefault(l.lairId == Id)
-                .Include(l => l.locationId);
-
+               .Include(l => l.CrisisEvents)
+               .FirstOrDefault(l => l.LocationId == id);
         }
         public void AddLocation(Location location)
         {
@@ -48,7 +49,7 @@ namespace Havoc_And_Haven.DAL
             Location exsisting = _context.Locations.Find(location.LocationId);
             if (exsisting != null)
             {
-                exsisting.LocationName = location.LocationName;
+                exsisting.Address = location.Address;
                 exsisting.Description = location.Description;
 
                 _context.Locations.Update(exsisting);
@@ -62,7 +63,7 @@ namespace Havoc_And_Haven.DAL
         }
         public void Deletelocation(Location Location)
         {
-            Location? _location = _context.Locations.Find(Id);
+            Location? _location = _context.Locations.Find(Location.LocationId);
             if (Location != null)
             {
                 _context.Locations.Remove(Location);
