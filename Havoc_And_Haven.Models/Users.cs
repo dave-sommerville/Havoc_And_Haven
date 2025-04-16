@@ -18,8 +18,5 @@ namespace Havoc_And_Haven.Models
         public Headquarters Headquarters { get; set; }
         public int? LairId { get; set; }
         public Lair Lair { get; set; }
-
-        public int? BattleId { get; set; }
-        public Battle? battle { get; set; }
     }
 }
