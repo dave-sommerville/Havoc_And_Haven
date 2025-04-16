@@ -1,0 +1,21 @@
+﻿@model Havoc_And_Haven.Models.CrisisEvent
+
+<h2>Crisis Event Details</h2>
+
+<table class="table">
+    <tr>
+        <th>Title:</th>
+        <td>@Model.Title</td>
+    </tr>
+    <tr>
+        <th>Date:</th>
+        <td>@Model.CreatedAt.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>Location:</th>
+        <td>@Model.Location?.Neighborhood</td>
+    </tr>
+</table>
+
+<button type="button" onclick="window.location.href='/CrisisEvent/Edit/@Model.CrisisId'">Edit</button>
+<button type="button" onclick="window.location.href='/CrisisEvent/Index'">Back to List</button>

@@ -1,0 +1,34 @@
+﻿@model PublicProfileVM
+
+<h1>User Profile</h1>
+<h2>@Model.Alias</h2>
+<!-- Should hide ids from non-admin users -->
+<p>User Id: @Model.UserId</p>
+<div>
+	<h4>Personal Information</h4>
+	<p>Power Level: @Model.PowerLevel</p>
+	<p>Origin Story:<br>@Model.OriginStory</p>
+</div>
+<div>
+
+	@if (Model.HeadquartersId != null)
+	{
+		<h4>Headquarters</h4>
+		<p>Base Title: @Model.HeadquarterTitle</p>
+		<p>Capacity: @Model.HeadquarterCapacity</p>
+		<p>Description:<br>@Model.HeadquarterDescription</p>
+		<p>Location: @Model.HeadquarterLocation</p>
+	}
+	else if (Model.LairId != null)
+	{
+		<h4>Lair</h4>
+		<p>Base Title: @Model.LairTitle</p>
+		<p>Capacity: @Model.LairCapacity</p>
+		<p>Description:<br>@Model.LairDescription</p>
+		<p>Location: @Model.LairLocation</p>
+	}
+	else
+	{
+		<p>User has no base</p>
+	}
+</div>

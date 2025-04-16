@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Havoc_And_Haven.Models
+﻿namespace Havoc_And_Haven.Models
 {
     // This will be used for personal information as well as what is public. This view will also provide access for users to edit their information, 
-    // Find a new home base, or navigate to the crisis event creation page
+    // Find a new home base, or navigate to the crisis event creation page battle logic whatever 
     public class PrivateProfileVM
     {
         public int UserId { get; set; }

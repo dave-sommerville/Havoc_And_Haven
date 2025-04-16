@@ -9,9 +9,9 @@ namespace Havoc_And_Haven.Models
     // This View model will be used to hide personal details of users, but allow all users to see their fellows users of that role
     public class PublicProfileVM
     {
+        public int UserId { get; set; }
         public string Alias { get; set; }
         public string OriginStory { get; set; }
-        public string Role { get; set; } // Could also be an Enum
         public int PowerLevel { get; set; }
 
         // Headquarters Info (if Hero)
