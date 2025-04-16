@@ -41,6 +41,7 @@ namespace Havoc_And_Haven.DAL
                     j => j.HasOne<CrisisEvent>().WithMany().HasForeignKey("CrisisEventId")
                 );
 
+
             // Villains many-to-many relationship
             modelBuilder.Entity<CrisisEvent>()
                 .HasMany(ce => ce.Villains)
@@ -56,6 +57,18 @@ namespace Havoc_And_Haven.DAL
                 .HasOne(b => b.CrisisEvent)
                 .WithMany()
                 .HasForeignKey(b => b.CrisisId);
+
+            modelBuilder.Entity<Battle>()
+                .HasOne(b => b.Hero)
+                .WithMany()
+                .HasForeignKey(b => b.HeroId)
+                .OnDelete(DeleteBehavior.Restrict); // Optional: to avoid cascade delete issues
+
+            modelBuilder.Entity<Battle>()
+                .HasOne(b => b.Villain)
+                .WithMany()
+                .HasForeignKey(b => b.VillainId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // User relationships
             modelBuilder.Entity<Users>()
