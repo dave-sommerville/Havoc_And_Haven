@@ -39,9 +39,15 @@ namespace Havoc_And_Haven.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return View(new Location());
+            Location? location = _LocationService.GetAllLocations().FirstOrDefault(r => r.LocationId == id);
+            if (location == null)
+            {
+                return NotFound();
+            }
+
+            return View(location);
         }
 
         [HttpPost]
