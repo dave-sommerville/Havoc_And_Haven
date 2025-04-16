@@ -14,32 +14,42 @@ namespace Havoc_And_Haven.Controllers
 
             _LocationService = locationservice;
         }
+
         public IActionResult Index()
         {
             List<Location> locations = _LocationService.GetAllLocations();
             return View(locations);
         }
+
         [HttpGet]
-        public IActionResult Create() {
+        public IActionResult Create()
+        {
             return View(new Location());
         }
+
         [HttpPost]
-        public IActionResult Create(Location location) {
-            if (ModelState.IsValid) {
+        public IActionResult Create(Location location)
+        {
+            if (ModelState.IsValid)
+            {
                 _LocationService.Create(location);
                 return RedirectToAction(nameof(Index));
             }
             return View(location);
         }
+
         [HttpGet]
         public IActionResult Update()
         {
             return View(new Location());
         }
+
         [HttpGet]
         public IActionResult DeleteLocation(int id)
         {
-            Location? location = LocationService.GetLocationById(Id);
+            Location? location = _LocationService.GetLocationById(id);
+            return View(location);
         }
     }
+}
     
