@@ -19,8 +19,8 @@ namespace Havoc_And_Haven.DAL
         {
             return _context.CrisisEvents
                 .Include(c => c.Location)
-                .Include(c => c.Heroes)
-                .Include(c => c.Villains)
+                //.Include(c => c.Heroes)
+                //.Include(c => c.Villains)
                 .ToList();
         }
 
@@ -41,8 +41,16 @@ namespace Havoc_And_Haven.DAL
 
         public void Update(CrisisEvent crisis)
         {
-            _context.CrisisEvents.Update(crisis);
-            _context.SaveChanges();
+            CrisisEvent existingCrisis = _context.CrisisEvents.FirstOrDefault(c => c.CrisisId == crisis.CrisisId);
+            if (existingCrisis != null) {
+                existingCrisis.Title = crisis.Title;
+                existingCrisis.CreatedAt = crisis.CreatedAt;
+                existingCrisis.LocationId = crisis.LocationId;
+                existingCrisis.IsResolved = crisis.IsResolved;
+                _context.SaveChanges();
+            }
+            //_context.CrisisEvents.Update(crisis);
+            //_context.SaveChanges();
         }
 
         public void Delete(int id)

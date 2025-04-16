@@ -10,7 +10,7 @@
         public  ICollection<Users>? Heroes { get; set; }
         public bool IsResolved { get; set; } = false; // I think this is redundant 
         public int LocationId { get; set; }
-        public Location Location { get; set; }
+        public Location? Location { get; set; }
         //public Battle ResultingBattle { get; set; }
     }
 }

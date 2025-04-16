@@ -1,83 +1,33 @@
-﻿@model IEnumerable<Battle>
+﻿@model List<Havoc_And_Haven.Models.Battle>
 
-<h1>Battle Index</h1>
+<h2>Battles</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Battle ID</th>
-            <th>Heroes Involved</th>
-            <th>Villains Involved</th>
-            <th>Location Address</th>
-            <th>Time of Battle</th>
-            <th>Event Description</th>
-            <th>Outcome</th> <!--If Null return default message-->
+            <th>Incident Begin Date</th>
+            <th>Winner</th>
+            <th>Crisis Event</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var battle in Model)
+        @foreach (Battle battle in Model)
         {
             <tr>
-                <td>@battle.BattleId</td>
+                <td>@battle.IncidentBegan.ToShortDateString()</td>
+                <td>@battle.Winner</td>
+                <td>@battle.CrisisEvent.Title</td>
                 <td>
-                    @if (battle.CrisisEvent.Heroes != null && battle.CrisisEvent.Heroes.Any())
-                    {
-                        <ul>
-                            @foreach (var hero in battle.CrisisEvent.Heroes)
-                            {
-                                <li>@hero.Alias</li>
-                            }
-                        </ul>
-                    }
-                    else
-                    {
-                        <p>No Heroes Involved</p>
-                    }
-                </td>
-                <td>
-                    @if (battle.CrisisEvent.Villains != null && battle.CrisisEvent.Villains.Any())
-                    {
-                        <ul>
-                            @foreach (var villain in battle.CrisisEvent.Villains)
-                            {
-                                <li>@villain.Alias</li>
-                            }
-                        </ul>
-                    }
-                    else
-                    {
-                        <p>No Villains Involved</p>
-                    }
-                </td>
-                <td>@battle.CrisisEvent.Location?.Address ?? "Location not available"</td>
-                <td>@battle.IncidentBegan.ToString("yyyy-MM-dd HH:mm")</td>
-                <td>@battle.CrisisEvent?.Title ?? "No Event Description"</td>
-                <td>
-                    @if (string.IsNullOrEmpty(battle.Winner))
-                    {
-                        <p>Battle Not Completed</p>
-                    }
-                    else
-                    {
-                        <p>@battle.Winner</p>
-                    }
-                </td>
-                <!-- If you're adding actions like "Add Heroes" or "Start Battle" buttons, it should be based on the user's role or permissions -->
-                <td>
-                    <!-- Only heroes or admin can add heroes to the battle -->
-                    @if (User.IsInRole("Hero") || User.IsInRole("Admin"))
-                    {
-                        <!-- Dropdown or buttons to add heroes -->
-                        <button class="btn btn-primary">Add Heroes</button>
-                    }
-
-                    <!-- Only villains can create a battle -->
-                    @if (User.IsInRole("Villain") || User.IsInRole("Admin"))
-                    {
-                        <button class="btn btn-danger">Start Battle</button>
-                    }
+                    <a href="/Battle/Details/@battle.BattleId">View</a>
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@battle.BattleId" />
+                        <button type="submit">Delete</button>
+                    </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<button type="button" onclick="window.location.href='/Battle/Create'">Create</button>

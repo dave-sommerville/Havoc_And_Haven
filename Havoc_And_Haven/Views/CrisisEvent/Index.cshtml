@@ -1,3 +1,49 @@
-﻿@model IEnumerable<CrisisEvent>
+﻿@model List<Havoc_And_Haven.Models.CrisisEvent>
 
-	<!-- Idk if this one is really needed because every crisis event is nested in a battle and visible there-->
+<h2>Crisis Events</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Location</th>
+            @* <th>Heroes</th> *@
+            @* <th>Villains</th> *@
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CrisisEvent crisis in Model)
+        {
+            <tr>
+                <td>@crisis.Title</td>
+                <td>@crisis.CreatedAt.ToShortDateString()</td>
+                <td>@crisis.Location?.Neighborhood</td>
+                @* <td> *@
+                @*     @foreach (Users hero in crisis.Heroes) *@
+                @*     { *@
+                @*         @hero.Alias <br /> *@
+                @*     } *@
+                @* </td> *@
+                @* <td> *@
+                @*     @foreach (Users villain in crisis.Villains) *@
+                @*     { *@
+                @*         @villain.Alias <br /> *@
+                @*     } *@
+                @* </td> *@
+                <td>
+                    <a href="/CrisisEvent/Detail/@crisis.CrisisId">View</a>
+                    <form asp-action="Delete">
+                        <input type="hidden" name="id" value="@crisis.CrisisId" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" onclick="window.location.href='/CrisisEvent/Create'">Create</button>
+@* <button type="button" onclick="window.location.href='/CrisisEvent/Edit'">Edit</button> *@
+

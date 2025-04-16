@@ -1,25 +1,55 @@
-﻿@model CrisisEvent
-<h1>Respond to a Crisis Event</h1>
-<form asp-action="Create">
-	<div class="form-group">
-		<label asp-for="Title" class="control-label"></label>
-		<input asp-for="Title" class="form-control" />
-		<span asp-validation-for="Title" class="text-danger"></span>
-	</div>
-	<div class="form-group">
-		<label asp-for="Title" class="control-label"></label>
-		<input asp-for="Title" class="form-control" />
-		<span asp-validation-for="Title" class="text-danger"></span>
-	</div>
-	<div class="scroll-box">
-		@foreach (Users hero in ViewBag.Heroes)
-		{
-			<input type="checkbox" value="@hero.UserId" name="selectedEvidence" /> @hero.Alias <br />
-		}
-	</div>
-	<div class="form-group">
-		<label asp-for="LocationId" class="control-label"></label>
-		<select asp-for="LocationId" class="form-control" asp-items="ViewBag.Locations"></select>
-		<span asp-validation-for="LocationId" class="text-danger"></span>
-	</div>
+﻿@model Havoc_And_Haven.Models.CrisisEvent
+
+<h2>Create Crisis Event</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label for="Title">Title</label>
+        <input type="text" id="Title" name="Title" required />
+    </div>
+
+    <div>
+        <label for="CreatedAt">Date</label>
+        <input type="datetime-local" id="CreatedAt" name="CreatedAt" required />
+    </div>
+
+    <div>
+        <label for="LocationId">Location</label>
+        <select id="LocationId" name="LocationId">
+            <option value="">Select Location</option>
+            @foreach (Location location in ViewBag.Locations)
+            {
+                <option value="@location.LocationId">@location.Neighborhood</option>
+            }
+        </select>
+        <span asp-validation-for="LocationId" class="text-danger"></span>
+    </div>
+    <div class="form-check">
+        <input asp-for="IsResolved" class="form-check-input" type="checkbox" />
+        <label asp-for="IsResolved" class="form-check-label"></label>
+    </div>
+    <span asp-validation-for="IsResolved" class="text-danger"></span>
+
+
+    @* <div> *@
+    @*     <label for="Heroes">Heroes</label> *@
+    @*     <select multiple id="Heroes" name="Heroes"> *@
+    @*         @foreach (var hero in ViewData["Heroes"] as List<Havoc_And_Haven.Models.Users>) *@
+    @*         { *@
+    @*             <option value="@hero.UserId">@hero.Alias</option> *@
+    @*         } *@
+    @*     </select> *@
+    @* </div> *@
+
+    @* <div> *@
+    @*     <label for="Villains">Villains</label> *@
+    @*     <select multiple id="Villains" name="Villains"> *@
+    @*         @foreach (var villain in ViewData["Villains"] as List<Havoc_And_Haven.Models.Users>) *@
+    @*         { *@
+    @*             <option value="@villain.UserId">@villain.Alias</option> *@
+    @*         } *@
+    @*     </select> *@
+    @* </div> *@
+
+    <button type="submit">Create Crisis Event</button>
 </form>

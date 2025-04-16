@@ -1,0 +1,48 @@
+﻿@model Havoc_And_Haven.Models.CrisisEvent
+
+<h2>Edit Crisis Event</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="CrisisId" />
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="CreatedAt"></label>
+        <input asp-for="CreatedAt" class="form-control" type="date" />
+        <span asp-validation-for="CreatedAt" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="LocationId"></label>
+        <select asp-for="LocationId" asp-items="@(new SelectList(ViewBag.Locations, "LocationId", "Neighborhood"))" class="form-control">
+            <option value="">Select Location</option>
+        </select>
+        <span asp-validation-for="LocationId" class="text-danger"></span>
+    </div>
+
+    <div class="form-check">
+        <input asp-for="IsResolved" class="form-check-input" type="checkbox" />
+        <label asp-for="IsResolved" class="form-check-label"></label>
+        <span asp-validation-for="IsResolved" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+@* <div> *@
+@*     <label for="Heroes">Heroes</label> *@
+@*     <select asp-for="Heroes" asp-items="@(new SelectList(ViewData["Heroes"] as  *@
+@*          List<Havoc_And_Haven.Models.Users>, "UserId", "Alias"))" class="form-control"> *@
+@*         <option value="">Select Heroes</option> *@
+@*     </select> *@
+@* </div> *@
+
+@* <div> *@
+@*     <label for="Villains">Villains</label> *@
+@*     <select multiple asp-for="Villains" asp-items="@(new SelectList(ViewData["Villains"] as List<Havoc_And_Haven.Models.Users>, "UserId", "Alias"))" class="form-control"> *@
+@*         <option value="">Select Villains</option> *@
+@*     </select> *@
+@* </div> *@
