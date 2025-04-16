@@ -74,6 +74,14 @@ html {
   min-height: 100%;
 }
 
+.flex {
+    display: flex;
+}
+
+.f-col {
+    display: flex;
+    flex-direction: column;
+}
 body {
   margin-bottom: 60px;
   width: 100%;
@@ -320,4 +328,179 @@ form {
     height: 50px;
     border-radius: 10px;
 }
+}
+  width: 100%;
+  background-color: #d2d2fe;
+}
+
+.hero-banner {
+    height: 100svh;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    img
+
+{
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+}
+
+h1 {
+    position: absolute;
+    text-align: center;
+    font-size: 80px;
+    font-family: "Poppins", "Inter", sans-serif;
+}
+
+.havoc {
+    font-family: "Nosifer";
+}
+
+.haven {
+    font-family: "Rubik Mono One";
+}
+
+.eye.left {
+    position: absolute;
+    right: 50%;
+    top: 282px;
+    margin-right: -12px;
+    z-index: 5;
+    height: 40px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: #ff9900;
+    box-shadow: 2px 2px 2px #ffbb22;
+}
+
+.eye.right {
+    position: absolute;
+    left: 50%;
+    top: 282px;
+    margin-left: 78px;
+    z-index: 5;
+    height: 40px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: #ff9900;
+    box-shadow: 2px 2px 2px #ffbb22;
+}
+
+.mo-fire {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    z-index: 100;
+}
+
+    .mo-fire.left {
+        right: 50%;
+        margin-right: -90px;
+        top: 110px;
+    }
+
+    .mo-fire.right {
+        left: 50%;
+        margin-left: -25px;
+        top: 112px;
+    }
+
+.btn-wrapper {
+    position: absolute;
+    bottom: 150px;
+    margin: 0 auto;
+    button
+
+{
+    border: none;
+    text-decoration: none;
+    height: 60px;
+    width: 100px;
+    background-color: #dd6900;
+    margin: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+}
+
+.mo-fire svg {
+    width: 100%;
+    height: auto;
+    position: relative
+}
+
+.flame {
+    animation-name: flamefly;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    opacity: 0;
+    transform-origin: 50% 50% 0;
+}
+
+    .flame.one {
+        animation-delay: 1s;
+        animation-duration: 3s;
+    }
+
+.flame3.two {
+    animation-duration: 5s;
+    animation-delay: 1s;
+}
+
+.flame-main {
+    animation-name: flameWobble;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+    .flame-main.one {
+        animation-duration: 4s;
+        animation-delay: 1s;
+    }
+
+    .flame-main.two {
+        animation-duration: 3s;
+        animation-delay: 2s;
+    }
+
+    .flame-main.three {
+        animation-duration: 2.1s;
+        animation-delay: 3s;
+    }
+
+    .flame-main.four {
+        animation-duration: 3.2s;
+        animation-delay: 4s;
+    }
+
+    .flame-main.five {
+        animation-duration: 2.5s;
+        animation-delay: 5s;
+    }
+
+@keyframes flameWobble {
+    50% {
+        transform: scale(1,1.2) translate(0, -30px) rotate(-2deg);
+    }
+}
+
+@keyframes flamefly {
+    0% {
+        transform: translate(0) rotate(180deg);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-20px, -100px) rotate(180deg);
+        opacity: 0;
+    }
 }
