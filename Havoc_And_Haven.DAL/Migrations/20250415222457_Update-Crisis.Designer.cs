@@ -4,6 +4,7 @@ using Havoc_And_Haven.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Havoc_And_Haven.DAL.Migrations
 {
     [DbContext(typeof(HavocAndHavenDbContext))]
-    partial class HavocAndHavenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250415222457_Update-Crisis")]
+    partial class UpdateCrisis
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,9 +216,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("BattleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -253,8 +253,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
-
-                    b.HasIndex("BattleId");
 
                     b.HasIndex("HeadquartersId");
 
@@ -341,10 +339,6 @@ namespace Havoc_And_Haven.DAL.Migrations
 
             modelBuilder.Entity("Havoc_And_Haven.Models.Users", b =>
                 {
-                    b.HasOne("Havoc_And_Haven.Models.Battle", "battle")
-                        .WithMany()
-                        .HasForeignKey("BattleId");
-
                     b.HasOne("Havoc_And_Haven.Models.Headquarters", "Headquarters")
                         .WithMany("Heroes")
                         .HasForeignKey("HeadquartersId");
@@ -360,8 +354,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Navigation("Headquarters");
 
                     b.Navigation("Lair");
-
-                    b.Navigation("battle");
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.Headquarters", b =>

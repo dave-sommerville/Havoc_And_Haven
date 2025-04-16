@@ -1,0 +1,33 @@
+﻿@model List<Havoc_And_Haven.Models.CrisisEvent>
+
+<h2>Crisis Events</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CrisisEvent crisis in Model)
+        {
+            <tr>
+                <td>@crisis.Title</td>
+                <td>@crisis.CreatedAt.ToShortDateString()</td>
+                <td>@crisis.Location?.Neighborhood</td>
+                <td>
+                    <button type="button" onclick="window.location.href='/CrisisEvent/Detail/@crisis.CrisisId'">View</button><br />
+                    <form asp-action="Delete">
+                        <input type="hidden" name="id" value="@crisis.CrisisId" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" onclick="window.location.href='/CrisisEvent/Create'">Create</button>

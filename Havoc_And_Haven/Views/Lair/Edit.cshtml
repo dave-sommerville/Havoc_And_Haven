@@ -1,0 +1,26 @@
+﻿<!-- ADMIN ONLY-->
+@model Lair
+
+<h1>Edit Lair</h1>
+<form asp-action="Edit">
+	<input type="hidden" asp-for="LairId"/>
+	<input type="hidden" asp-for="Villains" />
+	<div class="form-group">
+		<label asp-for="BaseTitle" class="control-label"></label>
+		<input asp-for="BaseTitle" class="form-control" />
+		<span asp-validation-for="BaseTitle" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Capacity" class="control-label"></label>
+		<input asp-for="Capacity" class="form-control" />
+		<span asp-validation-for="Capacity" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Description" class="control-label"></label>
+		<input asp-for="Description" class="form-control" />
+		<span asp-validation-for="Description" class="text-danger"></span>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Create</button>
+	<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,35 @@
+﻿<!-- ADMIN ONLY-->
+
+@model Lair
+<h1>Create Lair</h1>
+<form asp-action="Create">
+	<div class="form-group">
+		<label asp-for="BaseTitle" class="control-label"></label>
+		<input asp-for="BaseTitle" class="form-control" />
+		<span asp-validation-for="BaseTitle" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Capacity" class="control-label"></label>
+		<input asp-for="Capacity" class="form-control" />
+		<span asp-validation-for="Capacity" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Description" class="control-label"></label>
+		<input asp-for="Description" class="form-control" />
+		<span asp-validation-for="Description" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<label asp-for="LocationId" class="form-label">Select Location</label>
+		<select asp-for="LocationId" class="form-control">
+			<option value="">-- Select Location --</option>
+			@foreach (Location location in ViewBag.Locations)
+			{
+				<option value="@location.LocationId">@location.Type</option>
+			}
+		</select>
+		<span asp-validation-for="LocationId" class="text-danger fw-bold"></span>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Create</button>
+	<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,35 @@
+﻿<!--Visible to only the villains and admin -->
+@model IEnumerable<Headquarters>
+<h1>Hero Headquarters</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Base Title</th>
+			<th>Capacity</th>
+			<th>Description</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Headquarters headquarter in Model)
+		{
+			<tr>
+				<td>@headquarter.BaseTitle</td>
+				<td>@headquarter.Capacity</td>
+				<td>@headquarter.Description</td>
+				<td>
+					<a href="@Url.Action("Edit", "Headquarters", new { id = headquarter.HeadquartersId })" class="btn btn-warning">Edit</a>
+
+					<form asp-action="DeleteHeadquarterConfirmed" method="post" style="display:inline;">
+						<input type="hidden" name="id" value="@headquarter.HeadquartersId" />
+						<button type="submit" class="btn btn-danger">Delete</button>
+					</form>
+				</td>
+				@* <td>@lair.Location.Address</td> *@
+				@* <td>@lair.Location.Type</td> *@
+				<!-- Here villains should be able to select a lair to join (This will need logic)-->
+			</tr>
+		}
+	</tbody>
+</table>
+<a href="@Url.Action("Create", "Headquarters")" class="btn btn-primary">Add Headquarter</a>

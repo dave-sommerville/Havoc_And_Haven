@@ -1,0 +1,45 @@
+﻿@model List<Havoc_And_Haven.Models.Battle>
+
+<h2>Battles</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Incident Begin Date</th>
+            <th>Winner</th>
+            <th>Crisis Event</th>
+            <th>Heros</th>
+            <th>Villians</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Battle battle in Model)
+        {
+            <tr>
+                <td>@battle.IncidentBegan.ToShortDateString()</td>
+                <td>@battle.Winner</td>
+                <td>@battle.CrisisEvent.Title</td>
+                <td>
+                    @foreach (var hero in ViewBag.Heros)
+                    {
+                        <span>@hero.Alias,</span>                    }
+                </td>
+                <td>
+                    @foreach (var villain in ViewBag.Villians )
+                    {
+                        <span>@villain.Alias,</span>
+                    }
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@battle.BattleId" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" onclick="window.location.href='/Battle/Create'">Create</button>
