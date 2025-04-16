@@ -19,8 +19,6 @@ namespace Havoc_And_Haven.DAL
         {
             return _context.CrisisEvents
                 .Include(c => c.Location)
-                //.Include(c => c.Heroes)
-                //.Include(c => c.Villains)
                 .ToList();
         }
 

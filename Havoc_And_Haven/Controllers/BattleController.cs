@@ -13,8 +13,6 @@ namespace Havoc_And_Haven.Controllers {
 
         public IActionResult Index() {
             List<Battle> battles = _battleService.GetAllBattles();
-
-            // Fetch all heroes and villains to display globally in the view
             ViewBag.Heros = _battleService.GetHeroes();
             ViewBag.Villians = _battleService.GetVillains();
             return View(battles);
