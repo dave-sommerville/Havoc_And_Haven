@@ -10,12 +10,12 @@ namespace Havoc_And_Haven.Controllers
 {
     public class HeadquartersController : Controller {
         private readonly HeadquartersService _headquartersService;
-        //private readonly LocationService _locationService;
+        private readonly LocationService _locationService;
 
-        public HeadquartersController(HeadquartersService headquartersService)
+        public HeadquartersController(HeadquartersService headquartersService, LocationService locationService)
         {
             _headquartersService = headquartersService;
-            //_locationService = locationService;
+            _locationService = locationService;
         }
         public IActionResult Index() {
             List<Headquarters> headquarters = _headquartersService.GetAllHeadquarters();
@@ -24,7 +24,7 @@ namespace Havoc_And_Haven.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            //ViewBag.Locations = _locationService.GetAllLocation();
+            ViewBag.Locations = _locationService.GetAllLocations();
             return View(new Headquarters());
         }
         [HttpPost]
@@ -32,12 +32,12 @@ namespace Havoc_And_Haven.Controllers
         {
             if (ModelState.IsValid)
             {
-                //headquarter.Location = _locationService.GetLocationById(headquarter.LocationId);
+                headquarter.Location = _locationService.GetLocationById(headquarter.LocationId);
                 _headquartersService.AddHeadquarter(headquarter);
 
                 return RedirectToAction("Index");
             }
-            //ViewBag.Locations = _locationService.GetAllLocation();
+            ViewBag.Locations = _locationService.GetAllLocations();
             return View(headquarter);
         }
 
@@ -50,7 +50,7 @@ namespace Havoc_And_Haven.Controllers
                 return NotFound();
             }
 
-            //ViewBag.Locations = _locationService.GetAllLocation();
+            ViewBag.Locations = _locationService.GetAllLocations();
             return View(headquarter);
         }
         [HttpPost]
@@ -62,7 +62,7 @@ namespace Havoc_And_Haven.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.Locations = _locationService.GetAllLocation();
+            ViewBag.Locations = _locationService.GetAllLocations();
             return View(headquarter);
         }
 
