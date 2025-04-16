@@ -33,7 +33,7 @@
         <label for="Heroes">Heroes</label>
         <select id="HeroId" name="HeroId" required>
             <option value="">Select Hero</option>
-            @foreach (var hero in ViewBag.Heros)
+            @foreach (Users hero in ViewBag.Heros)
             {
                 <option value="@hero.UserId">@hero.FirstName @hero.LastName (@hero.Alias)</option>
             }
@@ -44,7 +44,7 @@
         <label for="Villains">Villains</label>
         <select id="VillainId" name="VillainId" required>
             <option value="">Select Villain</option>
-            @foreach (var villain in ViewBag.Villians)
+            @foreach (Users villain in ViewBag.Villians)
             {
                 <option value="@villain.UserId">@villain.FirstName @villain.LastName (@villain.Alias)</option>
             }

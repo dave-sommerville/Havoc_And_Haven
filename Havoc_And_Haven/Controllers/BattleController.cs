@@ -31,12 +31,6 @@ namespace Havoc_And_Haven.Controllers {
             if (ModelState.IsValid) {
                 _battleService.CreateBattle(battle);
                 return RedirectToAction("Index");
-            } else {
-                foreach (var value in ModelState.Values) {
-                    foreach (var error in value.Errors) {
-                        Console.WriteLine(error.ErrorMessage); 
-                    }
-                }
             }
 
             ViewBag.Crises = _battleService.GetAllCrises();
