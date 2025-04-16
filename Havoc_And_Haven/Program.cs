@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Havoc_And_Haven.DAL;
 using Havoc_And_Haven.BLL;
-using Havoc_And_Haven.BL;
 
 namespace Havoc_And_Haven
 {
@@ -16,21 +15,12 @@ namespace Havoc_And_Haven
             builder.Services.AddDbContext<HavocAndHavenDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
-            // Register DAL AND BLL Services
-            builder.Services.AddTransient<CrisisEventRepository>();
-            builder.Services.AddTransient<CrisisEventService>();
-
-            builder.Services.AddTransient<BattleRepository>();
-            builder.Services.AddTransient<BattleService>();
-
-            builder.Services.AddTransient<HeadquartersRepository>();
-            builder.Services.AddTransient<HeadquartersService>();
-
-            builder.Services.AddTransient<LairRepository>();
-            builder.Services.AddTransient<LairService>();
+            builder.Services.AddScoped<LocationRepository>();
+            builder.Services.AddScoped<LocationService>();
 
             var app = builder.Build();
+
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
