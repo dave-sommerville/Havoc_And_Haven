@@ -40,7 +40,7 @@ namespace Havoc_And_Haven.Controllers
 
         [HttpGet]
         public IActionResult Edit(int id) {
-            Lair? lair = _lairService.GetAllLairs().FirstOrDefault(r => r.LairId == id);
+            Lair? lair = _lairService.GetLairById(id);
             if (lair == null) {
                 return NotFound();
             }

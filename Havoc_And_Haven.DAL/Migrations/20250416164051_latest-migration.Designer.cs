@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Havoc_And_Haven.DAL.Migrations
 {
     [DbContext(typeof(HavocAndHavenDbContext))]
-    [Migration("20250416140733_Updatebattleid")]
-    partial class Updatebattleid
+    [Migration("20250416164051_latest-migration")]
+    partial class latestmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,8 +66,14 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Property<int>("CrisisId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("HeroId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("IncidentBegan")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("VillainId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Winner")
                         .HasMaxLength(100)
@@ -76,6 +82,10 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.HasKey("BattleId");
 
                     b.HasIndex("CrisisId");
+
+                    b.HasIndex("HeroId");
+
+                    b.HasIndex("VillainId");
 
                     b.ToTable("Battles");
                 });
@@ -301,7 +311,21 @@ namespace Havoc_And_Haven.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Havoc_And_Haven.Models.Users", "Hero")
+                        .WithMany()
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Havoc_And_Haven.Models.Users", "Villain")
+                        .WithMany()
+                        .HasForeignKey("VillainId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("CrisisEvent");
+
+                    b.Navigation("Hero");
+
+                    b.Navigation("Villain");
                 });
 
             modelBuilder.Entity("Havoc_And_Haven.Models.CrisisEvent", b =>

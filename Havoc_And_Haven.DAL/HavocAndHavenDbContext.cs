@@ -26,7 +26,7 @@ namespace Havoc_And_Haven.DAL
             modelBuilder.Entity<CrisisEvent>().HasKey(e => e.CrisisId);
             modelBuilder.Entity<Battle>().HasKey(b => b.BattleId);
 
-                // CrisisEvent relationships
+            // CrisisEvent relationships
             modelBuilder.Entity<CrisisEvent>()
                 .HasOne(ce => ce.Location)
                 .WithMany(l => l.CrisisEvents)
@@ -74,11 +74,14 @@ namespace Havoc_And_Haven.DAL
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Headquarters)
                 .WithMany(h => h.Heroes)
-                .HasForeignKey(u => u.HeadquartersId);
+                .HasForeignKey(u => u.HeadquartersId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Lair)
-                .WithMany()
-                .HasForeignKey(u => u.LairId);
+                .WithMany(l => l.Villains) 
+                .HasForeignKey(u => u.LairId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // Location relationships
             modelBuilder.Entity<Location>()
@@ -141,5 +144,3 @@ namespace Havoc_And_Haven.DAL
         }
     }
 }
-
-

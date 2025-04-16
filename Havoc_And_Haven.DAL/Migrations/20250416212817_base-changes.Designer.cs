@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Havoc_And_Haven.DAL.Migrations
 {
     [DbContext(typeof(HavocAndHavenDbContext))]
-    [Migration("20250416145944_Addherosdb")]
-    partial class Addherosdb
+    [Migration("20250416212817_base-changes")]
+    partial class basechanges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -242,9 +242,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Property<int?>("LairId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LairId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -267,8 +264,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.HasIndex("HeadquartersId");
 
                     b.HasIndex("LairId");
-
-                    b.HasIndex("LairId1");
 
                     b.ToTable("Users");
                 });
@@ -365,15 +360,13 @@ namespace Havoc_And_Haven.DAL.Migrations
                 {
                     b.HasOne("Havoc_And_Haven.Models.Headquarters", "Headquarters")
                         .WithMany("Heroes")
-                        .HasForeignKey("HeadquartersId");
+                        .HasForeignKey("HeadquartersId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Havoc_And_Haven.Models.Lair", "Lair")
-                        .WithMany()
-                        .HasForeignKey("LairId");
-
-                    b.HasOne("Havoc_And_Haven.Models.Lair", null)
                         .WithMany("Villains")
-                        .HasForeignKey("LairId1");
+                        .HasForeignKey("LairId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Headquarters");
 
