@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Havoc_And_Haven.DAL.Migrations
 {
     [DbContext(typeof(HavocAndHavenDbContext))]
-    [Migration("20250416191222_Right")]
-    partial class Right
+    [Migration("20250416212817_base-changes")]
+    partial class basechanges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -360,11 +360,13 @@ namespace Havoc_And_Haven.DAL.Migrations
                 {
                     b.HasOne("Havoc_And_Haven.Models.Headquarters", "Headquarters")
                         .WithMany("Heroes")
-                        .HasForeignKey("HeadquartersId");
+                        .HasForeignKey("HeadquartersId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Havoc_And_Haven.Models.Lair", "Lair")
                         .WithMany("Villains")
-                        .HasForeignKey("LairId");
+                        .HasForeignKey("LairId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Headquarters");
 

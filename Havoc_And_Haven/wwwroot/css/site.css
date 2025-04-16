@@ -79,6 +79,22 @@ body {
   width: 100%;
   background-color: #d2d2fe;
 }
+.f-col {
+    display: flex;
+    flex-direction: column;
+}
+button {
+    border: none;
+    text-decoration: none;
+    height: 60px;
+    width: 100px;
+    background-color: #dd6900;
+    margin: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
 header {
     height: 10svh;
 }
@@ -102,32 +118,27 @@ header {
 h1 {
     text-align: center;
     font-size: 70px;
-    font-family: "Poppins", "Inter", sans-serif;
+    font-family: "Rubik Mono One", "Poppins", "Inter", sans-serif;
 }
 
 .title {
+    width: 100%;
     position: absolute;
     text-align: center;
-    font-size: 70px;
+    font-size: 100px;
 }
 .havoc {
     font-family: "Nosifer";
 }
 
-.haven {
-    position: absolute;
-    text-align: center;
-    font-size: 70px;
-    font-family: "Rubik Mono One";
-}
 
 .eye.left {
     position: absolute;
     right: 50%;
     top: 242px;
-    margin-right: -12px;
+    margin-right: -8px;
     z-index: 5;
-    height: 40px;
+    height: 48px;
     width: 60px;
     border-radius: 50%;
     background-color: #ff9900;
@@ -138,9 +149,9 @@ h1 {
     position: absolute;
     left: 50%;
     top: 242px;
-    margin-left: 78px;
+    margin-left: 58px;
     z-index: 5;
-    height: 40px;
+    height: 48px;
     width: 60px;
     border-radius: 50%;
     background-color: #ff9900;
@@ -157,33 +168,22 @@ h1 {
     .mo-fire.left {
         right: 50%;
         margin-right: -90px;
-        top: 70px;
+        top: 77px;
     }
 
     .mo-fire.right {
         left: 50%;
-        margin-left: -25px;
-        top: 72px;
+        margin-left: -45px;
+        top: 79px;
     }
 
 .btn-wrapper {
     position: absolute;
     bottom: 150px;
     margin: 0 auto;
-    button
-
-{
-    border: none;
-    text-decoration: none;
-    height: 60px;
-    width: 100px;
-    background-color: #dd6900;
-    margin: 5px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-}
-
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .mo-fire svg {
