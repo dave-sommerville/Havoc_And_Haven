@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Havoc_And_Haven.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class latestmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -94,28 +94,7 @@ namespace Havoc_And_Haven.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Battles",
-                columns: table => new
-                {
-                    BattleId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IncidentBegan = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Winner = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CrisisId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Battles", x => x.BattleId);
-                    table.ForeignKey(
-                        name: "FK_Battles_CrisisEvents_CrisisId",
-                        column: x => x.CrisisId,
-                        principalTable: "CrisisEvents",
-                        principalColumn: "CrisisId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
@@ -133,68 +112,103 @@ namespace Havoc_And_Haven.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_User_Headquarters_HeadquartersId",
+                        name: "FK_Users_Headquarters_HeadquartersId",
                         column: x => x.HeadquartersId,
                         principalTable: "Headquarters",
                         principalColumn: "HeadquartersId");
                     table.ForeignKey(
-                        name: "FK_User_Lairs_LairId",
+                        name: "FK_Users_Lairs_LairId",
                         column: x => x.LairId,
                         principalTable: "Lairs",
                         principalColumn: "LairId");
                     table.ForeignKey(
-                        name: "FK_User_Lairs_LairId1",
+                        name: "FK_Users_Lairs_LairId1",
                         column: x => x.LairId1,
                         principalTable: "Lairs",
                         principalColumn: "LairId");
                 });
 
             migrationBuilder.CreateTable(
-                name: "CrisisEventUser",
+                name: "Battles",
                 columns: table => new
                 {
-                    CrisisEventCrisisId = table.Column<int>(type: "int", nullable: false),
-                    HeroesUserId = table.Column<int>(type: "int", nullable: false)
+                    BattleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IncidentBegan = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Winner = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CrisisId = table.Column<int>(type: "int", nullable: false),
+                    HeroId = table.Column<int>(type: "int", nullable: true),
+                    VillainId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CrisisEventUser", x => new { x.CrisisEventCrisisId, x.HeroesUserId });
+                    table.PrimaryKey("PK_Battles", x => x.BattleId);
                     table.ForeignKey(
-                        name: "FK_CrisisEventUser_CrisisEvents_CrisisEventCrisisId",
-                        column: x => x.CrisisEventCrisisId,
+                        name: "FK_Battles_CrisisEvents_CrisisId",
+                        column: x => x.CrisisId,
                         principalTable: "CrisisEvents",
                         principalColumn: "CrisisId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CrisisEventUser_User_HeroesUserId",
-                        column: x => x.HeroesUserId,
-                        principalTable: "User",
+                        name: "FK_Battles_Users_HeroId",
+                        column: x => x.HeroId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Battles_Users_VillainId",
+                        column: x => x.VillainId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CrisisEventHeroes",
+                columns: table => new
+                {
+                    CrisisEventId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CrisisEventHeroes", x => new { x.CrisisEventId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_CrisisEventHeroes_CrisisEvents_CrisisEventId",
+                        column: x => x.CrisisEventId,
+                        principalTable: "CrisisEvents",
+                        principalColumn: "CrisisId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CrisisEventHeroes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CrisisEventUser1",
+                name: "CrisisEventVillains",
                 columns: table => new
                 {
-                    CrisisEvent1CrisisId = table.Column<int>(type: "int", nullable: false),
-                    VillainsUserId = table.Column<int>(type: "int", nullable: false)
+                    CrisisEventId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CrisisEventUser1", x => new { x.CrisisEvent1CrisisId, x.VillainsUserId });
+                    table.PrimaryKey("PK_CrisisEventVillains", x => new { x.CrisisEventId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_CrisisEventUser1_CrisisEvents_CrisisEvent1CrisisId",
-                        column: x => x.CrisisEvent1CrisisId,
+                        name: "FK_CrisisEventVillains_CrisisEvents_CrisisEventId",
+                        column: x => x.CrisisEventId,
                         principalTable: "CrisisEvents",
                         principalColumn: "CrisisId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CrisisEventUser1_User_VillainsUserId",
-                        column: x => x.VillainsUserId,
-                        principalTable: "User",
+                        name: "FK_CrisisEventVillains_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -205,19 +219,29 @@ namespace Havoc_And_Haven.DAL.Migrations
                 column: "CrisisId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Battles_HeroId",
+                table: "Battles",
+                column: "HeroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Battles_VillainId",
+                table: "Battles",
+                column: "VillainId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CrisisEventHeroes_UserId",
+                table: "CrisisEventHeroes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CrisisEvents_LocationId",
                 table: "CrisisEvents",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CrisisEventUser_HeroesUserId",
-                table: "CrisisEventUser",
-                column: "HeroesUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CrisisEventUser1_VillainsUserId",
-                table: "CrisisEventUser1",
-                column: "VillainsUserId");
+                name: "IX_CrisisEventVillains_UserId",
+                table: "CrisisEventVillains",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Headquarters_LocationId",
@@ -230,18 +254,18 @@ namespace Havoc_And_Haven.DAL.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_HeadquartersId",
-                table: "User",
+                name: "IX_Users_HeadquartersId",
+                table: "Users",
                 column: "HeadquartersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_LairId",
-                table: "User",
+                name: "IX_Users_LairId",
+                table: "Users",
                 column: "LairId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_LairId1",
-                table: "User",
+                name: "IX_Users_LairId1",
+                table: "Users",
                 column: "LairId1");
         }
 
@@ -252,16 +276,16 @@ namespace Havoc_And_Haven.DAL.Migrations
                 name: "Battles");
 
             migrationBuilder.DropTable(
-                name: "CrisisEventUser");
+                name: "CrisisEventHeroes");
 
             migrationBuilder.DropTable(
-                name: "CrisisEventUser1");
+                name: "CrisisEventVillains");
 
             migrationBuilder.DropTable(
                 name: "CrisisEvents");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Headquarters");
