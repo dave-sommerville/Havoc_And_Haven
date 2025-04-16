@@ -37,7 +37,7 @@ namespace Havoc_And_Haven.DAL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving racer: {ex.Message}");
+                Console.WriteLine($"Error saving headquarter: {ex.Message}");
                 throw;
             }
         }

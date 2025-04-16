@@ -43,7 +43,7 @@ namespace Havoc_And_Haven.DAL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving racer: {ex.Message}");
+                Console.WriteLine($"Error saving lair: {ex.Message}");
                 throw;
             }
         }
@@ -53,7 +53,7 @@ namespace Havoc_And_Haven.DAL
             Lair? existingLair = _context.Lairs.Find(lair.LairId);
             if (existingLair != null)
             {
-                Console.WriteLine($"Updating Headquarter {lair.LairId} in database.");
+                Console.WriteLine($"Updating Lair {lair.LairId} in database.");
 
                 existingLair.BaseTitle = lair.BaseTitle;
                 existingLair.Capacity = lair.Capacity;
@@ -64,7 +64,7 @@ namespace Havoc_And_Haven.DAL
             }
             else
             {
-                Console.WriteLine("Headquarter not found for update.");
+                Console.WriteLine("Lair not found for update.");
             }
         }
 
