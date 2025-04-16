@@ -21,14 +21,14 @@
                 <td>@battle.Winner</td>
                 <td>@battle.CrisisEvent.Title</td>
                 <td>
-                    @foreach (var hero in battle.CrisisEvent?.Heroes ?? new List<Users>())
+                    @foreach (var hero in ViewBag.Heros)
                     {
-                        <span>@hero.Alias</span>                    }
+                        <span>@hero.Alias,</span>                    }
                 </td>
                 <td>
-                    @foreach (var villain in battle.CrisisEvent.Villains)
+                    @foreach (var villain in ViewBag.Villians )
                     {
-                        <span>@villain.Alias</span>
+                        <span>@villain.Alias,</span>
                     }
                 </td>
                 <td>

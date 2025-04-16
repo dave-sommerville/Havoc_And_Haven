@@ -13,12 +13,18 @@ namespace Havoc_And_Haven.Controllers {
 
         public IActionResult Index() {
             List<Battle> battles = _battleService.GetAllBattles();
+
+            // Fetch all heroes and villains to display globally in the view
+            ViewBag.Heros = _battleService.GetHeroes();
+            ViewBag.Villians = _battleService.GetVillains();
             return View(battles);
         }
 
         [HttpGet]
         public IActionResult Create() {
             ViewBag.Crises = _battleService.GetAllCrises();
+            ViewBag.Heros = _battleService.GetHeroes();
+            ViewBag.Villians = _battleService.GetVillains();
             return View();
         }
 
@@ -36,7 +42,20 @@ namespace Havoc_And_Haven.Controllers {
             }
 
             ViewBag.Crises = _battleService.GetAllCrises();
+            ViewBag.Heros = _battleService.GetHeroes();
+            ViewBag.Villians = _battleService.GetVillains();
             return View(battle);
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id) {
+            Battle battle = _battleService.GetBattleById(id);
+            if (battle != null) {
+                _battleService.DeleteBattle(id);
+                return RedirectToAction("Index");
+            }
+            return Content("Not found!");
+        }
+
     }
 }
