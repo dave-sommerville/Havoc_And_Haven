@@ -20,6 +20,11 @@ namespace Havoc_And_Haven.DAL {
                 .ToList();
         }
 
+        public Battle GetBattleById(int id) {
+            return _context.Battles
+                .Include(b => b.CrisisEvent) // If you're using navigation property
+                .FirstOrDefault(b => b.BattleId == id);
+        }
 
         public void Add(Battle battle) {
             _context.Battles.Add(battle);
@@ -28,6 +33,14 @@ namespace Havoc_And_Haven.DAL {
 
         public List<CrisisEvent> GetAllCrises() {
             return _context.CrisisEvents.ToList();
+        }
+
+        public void Delete(int id) {
+            var battle = _context.Battles.Find(id);
+            if (battle != null) {
+                _context.Battles.Remove(battle);
+                _context.SaveChanges();
+            }
         }
 
         public List<Users> GetHeroes() {

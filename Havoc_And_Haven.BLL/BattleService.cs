@@ -16,6 +16,10 @@ namespace Havoc_And_Haven.BL
             return _repo.GetAll();
         }
 
+        public Battle GetBattleById(int id) {
+            return _repo.GetBattleById(id);
+        }
+
         public void CreateBattle(Battle battle) {
             _repo.Add(battle);
         }
@@ -24,6 +28,9 @@ namespace Havoc_And_Haven.BL
             return _repo.GetAllCrises();
         }
 
+        public void DeleteBattle(int id) {
+            _repo.Delete(id);
+        }
         public List<Users> GetHeroes() {
             return _repo.GetHeroes();
         }

@@ -97,6 +97,7 @@ namespace Havoc_And_Haven.DAL
                 .IsRequired();
             modelBuilder.Entity<Users>().Property(u => u.OriginStory)
             .HasMaxLength(1000);
+            modelBuilder.Entity<Users>().Property(u => u.BattleId);
             modelBuilder.Entity<Headquarters>().Property(h => h.BaseTitle)
                 .IsRequired().HasMaxLength(100);
             modelBuilder.Entity<Headquarters>().Property(h => h.Capacity)
