@@ -1,14 +1,55 @@
-﻿@model Battle
-<h1>Initiate Battle</h1>
-<form asp-action="Create">
+﻿@model Havoc_And_Haven.Models.Battle
 
-	<!-- Will need to link model to a villains list to pass into the crisis event -->
-	<div class="form-group"> <!-- Non of the current properties will be set by anyone, so it will just be creating 
-		and assigning villains
-	-->
-		@* <label asp-for="" class="control-label"></label> *@
-		@* <select asp-for="" class="form-control" asp-items="ViewBag.CrisisEventId"></select> *@
-		@* <span asp-validation-for="" class="text-danger"></span> *@
-	</div>
+<h2>Create Battle</h2>
 
+<form asp-action="Create" method="post">
+    <div>
+        <label for="IncidentBegan">Incident Begin Date</label>
+        <input type="datetime-local" id="IncidentBegan" name="IncidentBegan" required />
+    </div>
+
+    <div>
+        <label for="Winner">Winner</label>
+        <select id="Winner" name="Winner" required>
+            <option value="">Select Winner</option>
+            <option value="Heroes">Heroes</option>
+            <option value="Villains">Villains</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="CrisisId">Crisis Event</label>
+        <select id="CrisisId" name="CrisisId" required>
+            <option value="">Select Crisis Event</option>
+            @foreach (CrisisEvent crisis in ViewBag.Crises)
+            {
+                <option value="@crisis.CrisisId">@crisis.Title</option>
+            }
+        </select>
+        <span asp-validation-for="CrisisId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="Heroes">Heroes</label>
+        <select id="HeroId" name="HeroId" required>
+            <option value="">Select Hero</option>
+            @foreach (Users hero in ViewBag.Heros)
+            {
+                <option value="@hero.UserId">@hero.FirstName @hero.LastName (@hero.Alias)</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label for="Villains">Villains</label>
+        <select id="VillainId" name="VillainId" required>
+            <option value="">Select Villain</option>
+            @foreach (Users villain in ViewBag.Villians)
+            {
+                <option value="@villain.UserId">@villain.FirstName @villain.LastName (@villain.Alias)</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Battle</button>
 </form>

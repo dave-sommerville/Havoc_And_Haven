@@ -19,8 +19,6 @@ namespace Havoc_And_Haven.DAL
         {
             return _context.CrisisEvents
                 .Include(c => c.Location)
-                .Include(c => c.Heroes)
-                .Include(c => c.Villains)
                 .ToList();
         }
 
@@ -41,8 +39,14 @@ namespace Havoc_And_Haven.DAL
 
         public void Update(CrisisEvent crisis)
         {
-            _context.CrisisEvents.Update(crisis);
-            _context.SaveChanges();
+            CrisisEvent existingCrisis = _context.CrisisEvents.FirstOrDefault(c => c.CrisisId == crisis.CrisisId);
+            if (existingCrisis != null) {
+                existingCrisis.Title = crisis.Title;
+                existingCrisis.CreatedAt = crisis.CreatedAt;
+                existingCrisis.LocationId = crisis.LocationId;
+                existingCrisis.IsResolved = crisis.IsResolved;
+                _context.SaveChanges();
+            }
         }
 
         public void Delete(int id)
@@ -55,23 +59,19 @@ namespace Havoc_And_Haven.DAL
             }
         }
 
-        public List<Users> GetHeroes()
-        {
+        public List<Users> GetHeroes() {
             return _context.Users.Where(u => u.Role == "Hero").ToList();
         }
 
-        public List<Users> GetVillains()
-        {
+        public List<Users> GetVillains() {
             return _context.Users.Where(u => u.Role == "Villain").ToList();
         }
 
-        public List<Location> GetAllLocations()
-        {
+        public List<Location> GetAllLocations() {
             return _context.Locations.ToList();
         }
 
-        public List<Users> GetUsersByIds(List<int> ids)
-        {
+        public List<Users> GetUsersByIds(List<int> ids) {
             return _context.Users.Where(u => ids.Contains(u.UserId)).ToList();
         }
     }

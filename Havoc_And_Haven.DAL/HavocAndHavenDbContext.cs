@@ -26,17 +26,31 @@ namespace Havoc_And_Haven.DAL
             modelBuilder.Entity<CrisisEvent>().HasKey(e => e.CrisisId);
             modelBuilder.Entity<Battle>().HasKey(b => b.BattleId);
 
-                // CrisisEvent relationships
+            // CrisisEvent relationships
             modelBuilder.Entity<CrisisEvent>()
                 .HasOne(ce => ce.Location)
                 .WithMany(l => l.CrisisEvents)
                 .HasForeignKey(ce => ce.LocationId);
+
             modelBuilder.Entity<CrisisEvent>()
                 .HasMany(ce => ce.Heroes)
-                .WithMany();
+                .WithMany() // Assuming Users (Heroes) have a collection of CrisisEvents
+                .UsingEntity<Dictionary<string, object>>(
+                    "CrisisEventHeroes", // This will be the name of the join table
+                    j => j.HasOne<Users>().WithMany().HasForeignKey("UserId"),
+                    j => j.HasOne<CrisisEvent>().WithMany().HasForeignKey("CrisisEventId")
+                );
+
+
+            // Villains many-to-many relationship
             modelBuilder.Entity<CrisisEvent>()
                 .HasMany(ce => ce.Villains)
-                .WithMany();
+                .WithMany() // Assuming Users (Villains) have a collection of CrisisEvents
+                .UsingEntity<Dictionary<string, object>>(
+                    "CrisisEventVillains", // This will be the name of the join table
+                    j => j.HasOne<Users>().WithMany().HasForeignKey("UserId"),
+                    j => j.HasOne<CrisisEvent>().WithMany().HasForeignKey("CrisisEventId")
+                );
 
             // Battle relationships
             modelBuilder.Entity<Battle>()
@@ -44,15 +58,30 @@ namespace Havoc_And_Haven.DAL
                 .WithMany()
                 .HasForeignKey(b => b.CrisisId);
 
+            modelBuilder.Entity<Battle>()
+                .HasOne(b => b.Hero)
+                .WithMany()
+                .HasForeignKey(b => b.HeroId)
+                .OnDelete(DeleteBehavior.Restrict); // Optional: to avoid cascade delete issues
+
+            modelBuilder.Entity<Battle>()
+                .HasOne(b => b.Villain)
+                .WithMany()
+                .HasForeignKey(b => b.VillainId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // User relationships
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Headquarters)
                 .WithMany(h => h.Heroes)
-                .HasForeignKey(u => u.HeadquartersId);
+                .HasForeignKey(u => u.HeadquartersId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Lair)
-                .WithMany()
-                .HasForeignKey(u => u.LairId);
+                .WithMany(l => l.Villains) 
+                .HasForeignKey(u => u.LairId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // Location relationships
             modelBuilder.Entity<Location>()
@@ -115,5 +144,3 @@ namespace Havoc_And_Haven.DAL
         }
     }
 }
-
-

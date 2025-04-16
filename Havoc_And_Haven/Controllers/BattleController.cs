@@ -13,12 +13,16 @@ namespace Havoc_And_Haven.Controllers {
 
         public IActionResult Index() {
             List<Battle> battles = _battleService.GetAllBattles();
+            ViewBag.Heros = _battleService.GetHeroes();
+            ViewBag.Villians = _battleService.GetVillains();
             return View(battles);
         }
 
         [HttpGet]
         public IActionResult Create() {
-            ViewBag.Crises = new SelectList(_battleService.GetAllCrises(), "CrisisId", "Title");
+            ViewBag.Crises = _battleService.GetAllCrises();
+            ViewBag.Heros = _battleService.GetHeroes();
+            ViewBag.Villians = _battleService.GetVillains();
             return View();
         }
 
@@ -29,8 +33,21 @@ namespace Havoc_And_Haven.Controllers {
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Crises = new SelectList(_battleService.GetAllCrises(), "CrisisId", "Title", battle.CrisisId);
+            ViewBag.Crises = _battleService.GetAllCrises();
+            ViewBag.Heros = _battleService.GetHeroes();
+            ViewBag.Villians = _battleService.GetVillains();
             return View(battle);
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id) {
+            Battle battle = _battleService.GetBattleById(id);
+            if (battle != null) {
+                _battleService.DeleteBattle(id);
+                return RedirectToAction("Index");
+            }
+            return Content("Not found!");
+        }
+
     }
 }
