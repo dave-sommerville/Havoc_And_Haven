@@ -1,0 +1,36 @@
+﻿@model List<Havoc_And_Haven.Models.Users>
+
+<h2>Users List</h2>
+
+<a href="@Url.Action("AddUser")" class="btn btn-primary">Add User</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Alias</th>
+            <th>Role</th>
+            <th>Power Level</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Alias</td>
+                <td>@user.Role</td>
+                <td>@user.PowerLevel</td>
+                <td>
+                    <a href="@Url.Action("EditUser", new { id = user.UserId })" class="btn btn-warning">Edit</a>
+
+                    <a href="@Url.Action("ViewProfile", new { id = user.UserId })" class="btn btn-info">View Profile</a>
+
+                    <form asp-action="DeleteUserConfirmed" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@user.UserId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
