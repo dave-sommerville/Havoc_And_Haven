@@ -31,8 +31,8 @@ namespace Havoc_And_Haven
             builder.Services.AddScoped<LairRepository>();
             builder.Services.AddScoped<LairService>();
 
-            builder.Services.AddScoped<UsersRepository>();
-            //builder.Services.AddScoped<UsersService>();
+            builder.Services.AddScoped<UserRepository>();
+            builder.Services.AddScoped<UserService>();
 
             var app = builder.Build();
 
