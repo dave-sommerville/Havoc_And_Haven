@@ -367,7 +367,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasOne("Havoc_And_Haven.Models.Lair", null)
                         .WithMany("Villains")
-                        .HasForeignKey("LairId1")
+                        .HasForeignKey("LairId1");
 
                     b.Navigation("Headquarters");
 
