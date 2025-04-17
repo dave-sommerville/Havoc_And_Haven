@@ -21,7 +21,7 @@
 				<td>
 					<a href="@Url.Action("Edit", "Lair", new { id = lair.LairId })" class="button">Edit</a>
 
-					<form asp-action="DeleteLairConfirmed" method="post" style="display:inline;">
+					<form asp-action="DeleteHeadquarterConfirmed" method="post" style="display:inline;">
 						<input type="hidden" name="id" value="@lair.LairId" />
 						<button type="submit" class="button">Delete</button>
 					</form>
