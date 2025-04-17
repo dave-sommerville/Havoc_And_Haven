@@ -1,10 +1,7 @@
 ﻿@model IEnumerable<Havoc_And_Haven.Models.Location>
 
 <h1>Locations</h1>
-
-<p>
-    <a asp-action="Create">Create </a>
-</p>
+<a asp-action="Create" class="button">Create Location</a>
 <table class="table">
     <thead>
         <tr>
@@ -40,11 +37,11 @@
                     @location.Description
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@location.LocationId">Edit</a>
+                    <a asp-action="Edit" asp-route-id="@location.LocationId" class="button">Edit</a>
 
                     <form asp-action="DeleteLocationConfirmed" method="post" style="display:inline;">
                         <input type="hidden" name="id" value="@location.LocationId" />
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="button">Delete</button>
                     </form>
                 </td>
             </tr>

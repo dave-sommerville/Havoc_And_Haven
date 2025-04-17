@@ -4,6 +4,7 @@ using Havoc_And_Haven.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Havoc_And_Haven.DAL.Migrations
 {
     [DbContext(typeof(HavocAndHavenDbContext))]
-    partial class HavocAndHavenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250417000710_fixingdeletebehaviour")]
+    partial class fixingdeletebehaviour
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,6 +242,9 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Property<int?>("LairId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("LairId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -261,6 +267,8 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.HasIndex("HeadquartersId");
 
                     b.HasIndex("LairId");
+
+                    b.HasIndex("LairId1");
 
                     b.ToTable("Users");
                 });
@@ -367,7 +375,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasOne("Havoc_And_Haven.Models.Lair", null)
                         .WithMany("Villains")
-                        .HasForeignKey("LairId1")
+                        .HasForeignKey("LairId1");
 
                     b.Navigation("Headquarters");
 
