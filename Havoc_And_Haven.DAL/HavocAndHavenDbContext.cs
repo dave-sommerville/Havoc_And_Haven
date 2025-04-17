@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Havoc_And_Haven.Models;
@@ -75,11 +75,10 @@ namespace Havoc_And_Haven.DAL
                 .HasOne(u => u.Headquarters)
                 .WithMany(h => h.Heroes)
                 .HasForeignKey(u => u.HeadquartersId)
-                .OnDelete(DeleteBehavior.SetNull);
-
+                 .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Lair)
-                .WithMany(l => l.Villains) 
+                .WithMany()
                 .HasForeignKey(u => u.LairId)
                 .OnDelete(DeleteBehavior.SetNull);
 

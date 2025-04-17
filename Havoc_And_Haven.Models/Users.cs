@@ -1,4 +1,3 @@
-﻿
 
 namespace Havoc_And_Haven.Models
 {
@@ -15,7 +14,6 @@ namespace Havoc_And_Haven.Models
 
         public int? HeadquartersId { get; set; }
         public Headquarters? Headquarters { get; set; }
-
         public int? LairId { get; set; }
         public Lair? Lair { get; set; }
     }
