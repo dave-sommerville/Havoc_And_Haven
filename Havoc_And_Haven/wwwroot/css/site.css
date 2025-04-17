@@ -70,7 +70,6 @@ input, button, textarea, select {
 }
 
 body, html {
-    height: 100%;
     scroll-behavior: smooth;
 }
 html {
@@ -82,10 +81,7 @@ html {
     display: flex;
 }
 
-.f-col {
-    display: flex;
-    flex-direction: column;
-}
+
 body {
   margin-bottom: 60px;
   width: 100%;
@@ -325,7 +321,6 @@ table {
     }
 
 form {
-    width: 1000px;
     height: fit-content;
     margin: auto;
     display: flex;
