@@ -1,6 +1,7 @@
 ﻿<!--Visible to only the villains and admin -->
 @model IEnumerable<Headquarters>
 <h1>Hero Headquarters</h1>
+<a href="@Url.Action("Create", "Headquarters")" class="button">Create Headquarters</a>
 <table class="table">
 	<thead>
 		<tr>
@@ -18,11 +19,11 @@
 				<td>@headquarter.Capacity</td>
 				<td>@headquarter.Description</td>
 				<td>
-					<a href="@Url.Action("Edit", "Headquarters", new { id = headquarter.HeadquartersId })" class="btn btn-warning">Edit</a>
+					<a href="@Url.Action("Edit", "Headquarters", new { id = headquarter.HeadquartersId })" class="button">Edit</a>
 
 					<form asp-action="DeleteHeadquarterConfirmed" method="post" style="display:inline;">
 						<input type="hidden" name="id" value="@headquarter.HeadquartersId" />
-						<button type="submit" class="btn btn-danger">Delete</button>
+						<button type="submit" class="button">Delete</button>
 					</form>
 				</td>
 				@* <td>@lair.Location.Address</td> *@
@@ -32,4 +33,3 @@
 		}
 	</tbody>
 </table>
-<a href="@Url.Action("Create", "Headquarters")" class="btn btn-primary">Add Headquarter</a>

@@ -16,21 +16,27 @@ namespace Havoc_And_Haven
             builder.Services.AddDbContext<HavocAndHavenDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddScoped<LocationRepository>();
+            builder.Services.AddScoped<LocationService>();
 
-            // Register DAL AND BLL Services
-            builder.Services.AddTransient<CrisisEventRepository>();
-            builder.Services.AddTransient<CrisisEventService>();
+            builder.Services.AddScoped<BattleRepository>();
+            builder.Services.AddScoped<BattleService>();
 
-            builder.Services.AddTransient<BattleRepository>();
-            builder.Services.AddTransient<BattleService>();
+            builder.Services.AddScoped<CrisisEventRepository>();
+            builder.Services.AddScoped<CrisisEventService>();
 
-            builder.Services.AddTransient<HeadquartersRepository>();
-            builder.Services.AddTransient<HeadquartersService>();
+            builder.Services.AddScoped<HeadquartersRepository>();
+            builder.Services.AddScoped<HeadquartersService>();
 
-            builder.Services.AddTransient<LairRepository>();
-            builder.Services.AddTransient<LairService>();
+            builder.Services.AddScoped<LairRepository>();
+            builder.Services.AddScoped<LairService>();
+
+            builder.Services.AddScoped<UsersRepository>();
+            //builder.Services.AddScoped<UsersService>();
 
             var app = builder.Build();
+
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

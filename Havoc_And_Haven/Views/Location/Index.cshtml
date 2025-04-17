@@ -1,32 +1,50 @@
-﻿@model IEnumerable<Location>
-<h1>All Locations</h1>
-<!-- Must add authorization for create/edit/delete options-->
-<table class="table">
-	<thead>
-		<tr>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (Location location in Model)
-		{
-			<tr>
-				<td>@location.Type</td>
-				<td>@location.Neighborhood</td>
-				<td>@location.Address</td>
-				<td>@location.Description</td>
-				<!-- The notes-->
-				<td> <!--Only for villains and admin-->
-					<!-- Not working currently, needs to route to battle/create action/view-->
-					<a asp-action="Create" asp-route-id="@location.LocationId">Start a Battle</a> |
-				</td>
-				<td>
-					<!--Only for hero and admin to see-->
-					<!-- Respond is a potential action for the heroes to add themselves to the battle-->
-					<a asp-action="Respond" asp-route-id="@location.LocationId">Create a Crisis Event</a> |
-				</td>
-			</tr>
+﻿@model IEnumerable<Havoc_And_Haven.Models.Location>
 
-		}
-	</tbody>
+<h1>Locations</h1>
+<a asp-action="Create" class="button">Create Location</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Neighborhood)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Location location in Model)
+        {
+            <tr>
+                <td>
+                    @location.Type
+                </td>
+                <td>
+                    @location.Neighborhood
+                </td>
+                <td>
+                    @location.Address
+                </td>
+                <td>
+                    @location.Description
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@location.LocationId" class="button">Edit</a>
+
+                    <form asp-action="DeleteLocationConfirmed" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@location.LocationId" />
+                        <button type="submit" class="button">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

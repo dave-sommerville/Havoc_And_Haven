@@ -239,9 +239,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.Property<int?>("LairId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LairId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -264,8 +261,6 @@ namespace Havoc_And_Haven.DAL.Migrations
                     b.HasIndex("HeadquartersId");
 
                     b.HasIndex("LairId");
-
-                    b.HasIndex("LairId1");
 
                     b.ToTable("Users");
                 });
@@ -372,7 +367,7 @@ namespace Havoc_And_Haven.DAL.Migrations
 
                     b.HasOne("Havoc_And_Haven.Models.Lair", null)
                         .WithMany("Villains")
-                        .HasForeignKey("LairId1");
+                        .HasForeignKey("LairId1")
 
                     b.Navigation("Headquarters");
 

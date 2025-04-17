@@ -1,6 +1,7 @@
 ﻿<!--Visible to only the villains and admin (Add routes for create and edit actions for admin)-->
 @model IEnumerable<Lair>
 <h1>Villain Lairs</h1>
+<a href="@Url.Action("Create", "Lair")" class="button">Create Lair</a>
 <table class="table">
 	<thead>
 		<tr>
@@ -18,11 +19,11 @@
 				<td>@lair.Capacity</td>
 				<td>@lair.Description</td>
 				<td>
-					<a href="@Url.Action("Edit", "Lair", new { id = lair.LairId })" class="btn btn-warning">Edit</a>
+					<a href="@Url.Action("Edit", "Lair", new { id = lair.LairId })" class="button">Edit</a>
 
 					<form asp-action="DeleteHeadquarterConfirmed" method="post" style="display:inline;">
 						<input type="hidden" name="id" value="@lair.LairId" />
-						<button type="submit" class="btn btn-danger">Delete</button>
+						<button type="submit" class="button">Delete</button>
 					</form>
 				</td>
 				@* <td>@lair.Location.Address</td> *@
@@ -32,4 +33,3 @@
 		}
 	</tbody>
 </table>
-<a href="@Url.Action("Create", "Lair")" class="btn btn-primary">Add Lair</a>

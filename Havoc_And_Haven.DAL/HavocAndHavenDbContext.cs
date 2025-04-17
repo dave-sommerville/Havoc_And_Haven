@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Havoc_And_Haven.Models;
@@ -26,7 +26,7 @@ namespace Havoc_And_Haven.DAL
             modelBuilder.Entity<CrisisEvent>().HasKey(e => e.CrisisId);
             modelBuilder.Entity<Battle>().HasKey(b => b.BattleId);
 
-                // CrisisEvent relationships
+            // CrisisEvent relationships
             modelBuilder.Entity<CrisisEvent>()
                 .HasOne(ce => ce.Location)
                 .WithMany(l => l.CrisisEvents)
@@ -143,5 +143,3 @@ namespace Havoc_And_Haven.DAL
         }
     }
 }
-
-
