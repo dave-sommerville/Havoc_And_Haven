@@ -1,0 +1,35 @@
+﻿@model Havoc_And_Haven.Models.Users
+
+<h2>User Profile - @Model.FirstName @Model.LastName</h2>
+
+<div>
+    <strong>First Name:</strong> @Model.FirstName
+</div>
+<div>
+    <strong>Last Name:</strong> @Model.LastName
+</div>
+<div>
+    <strong>Email:</strong> @Model.Email
+</div>
+<div>
+    <strong>Alias:</strong> @Model.Alias
+</div>
+<div>
+    <strong>Origin Story:</strong> @Model.OriginStory
+</div>
+<div>
+    <strong>Role:</strong> @Model.Role
+</div>
+<div>
+    <strong>Power Level:</strong> @Model.PowerLevel
+</div>
+
+<div>
+    <strong>Headquarters:</strong> @Model.Headquarters?.BaseTitle
+</div>
+
+<div>
+    <strong>Lair:</strong> @Model.Lair?.BaseTitle
+</div>
+
+<a href="@Url.Action("Index")" class="btn btn-secondary">Back to Users</a>

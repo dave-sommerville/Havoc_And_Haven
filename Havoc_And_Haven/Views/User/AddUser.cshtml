@@ -1,0 +1,83 @@
+﻿@model Havoc_And_Haven.Models.Users
+
+@{
+    ViewData["Title"] = "Add User";
+}
+
+<h2>Add User</h2>
+
+<form asp-action="AddUser" method="post">
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label">First Name</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label">Last Name</label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Alias" class="form-label">Alias</label>
+        <input asp-for="Alias" class="form-control" />
+        <span asp-validation-for="Alias" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="OriginStory" class="form-label">Origin Story</label>
+        <textarea asp-for="OriginStory" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="OriginStory" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Role" class="form-label">Role</label>
+        <select asp-for="Role" class="form-control">
+            <option value="">-- Select Role --</option>
+            <option value="Hero">Hero</option>
+            <option value="Villain">Villain</option>
+            <option value="Admin">Admin</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PowerLevel" class="form-label">Power Level</label>
+        <input asp-for="PowerLevel" class="form-control" />
+        <span asp-validation-for="PowerLevel" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="HeadquartersId" class="form-label">Headquarters</label>
+        <select asp-for="HeadquartersId" class="form-control">
+            <option value="">-- Select Headquarters --</option>
+            @foreach (Havoc_And_Haven.Models.Headquarters hq in ViewBag.Headquarters)
+            {
+                <option value="@hq.HeadquartersId">@hq.BaseTitle</option>
+            }
+        </select>
+        <span asp-validation-for="HeadquartersId" class="text-danger fw-bold"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LairId" class="form-label">Lair</label>
+        <select asp-for="LairId" class="form-control">
+            <option value="">-- Select Lair --</option>
+            @foreach (Havoc_And_Haven.Models.Lair lair in ViewBag.Lairs)
+            {
+                <option value="@lair.LairId">@lair.BaseTitle</option>
+            }
+        </select>
+        <span asp-validation-for="LairId" class="text-danger fw-bold"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add User</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

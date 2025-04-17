@@ -78,9 +78,9 @@ namespace Havoc_And_Haven.DAL
                  .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Lair)
-                .WithMany()
+                .WithMany(l => l.Villains)
                 .HasForeignKey(u => u.LairId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Location relationships
             modelBuilder.Entity<Location>()
