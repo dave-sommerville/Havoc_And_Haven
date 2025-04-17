@@ -29,5 +29,6 @@
         <label asp-for="IsResolved" class="form-check-label"></label>
     </div>
     <span asp-validation-for="IsResolved" class="text-danger"></span>
-    <button type="submit">Create Crisis Event</button>
+    <button class="button" type="submit">Save</button>
+    <button type="button" class="button" onclick="window.location.href='/CrisisEvent/Index'">Cancel</button>
 </form>
