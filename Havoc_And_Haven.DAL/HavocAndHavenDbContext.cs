@@ -74,11 +74,13 @@ namespace Havoc_And_Haven.DAL
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Headquarters)
                 .WithMany(h => h.Heroes)
-                .HasForeignKey(u => u.HeadquartersId);
+                .HasForeignKey(u => u.HeadquartersId)
+                 .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Users>()
                 .HasOne(u => u.Lair)
                 .WithMany()
-                .HasForeignKey(u => u.LairId);
+                .HasForeignKey(u => u.LairId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // Location relationships
             modelBuilder.Entity<Location>()
